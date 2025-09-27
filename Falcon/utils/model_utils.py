@@ -4,7 +4,7 @@ import torch
 import dotenv
 import os
 
-dotenv.load_dotenv("/data2/PromptMIA/.env")
+dotenv.load_dotenv()
 model_cache_dir = os.getenv("model_cache_dir")
 
 def load_model(model_name = "tiiuae/falcon-7b-instruct"):
