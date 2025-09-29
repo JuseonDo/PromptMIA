@@ -1,1 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environment
 .env
+.venv/
+env/
+venv/
+
+# VS Code
+.vscode/
+
+# Models (large files)
+models/
+*.bin
+*.safetensors
+
+# temporary files
+.locks
+*.locks
+
+# OS
+.DS_Store
+Thumbs.db
