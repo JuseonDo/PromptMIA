@@ -15,6 +15,7 @@ class GenerateConfig:
     temperature: float = 0.7
     top_p: float = 0.9
     top_k: int = 0
+    prompt_type: str = "fewshot"
     repetition_penalty: float = 1.0
     # decoding control
     num_return_sequences: int = 1
@@ -67,7 +68,7 @@ class FalconGenerator:
             # device_map=device_map,
             trust_remote_code=trust_remote_code,
             **model_kwargs,
-        ).to('cuda')
+        ).to('cuda' if torch.cuda.is_available() else 'cpu')
 
         # Falcon은 종종 pad_token이 없음 -> eos로 세팅
         if self.tokenizer.pad_token_id is None:
@@ -154,7 +155,7 @@ class FalconGenerator:
         prompts: List[str],
         cfg: Optional[GenerateConfig] = None,
         **gen_kwargs
-    ) -> List[str]:
+    ):
         """
         배치 프롬프트 생성.
         """
@@ -162,7 +163,6 @@ class FalconGenerator:
             raise ValueError("prompts는 비어있지 않은 리스트여야 합니다.")
 
         cfg = cfg or GenerateConfig()
-        print("=== DEBUG: 토큰화 전 프롬프트 ===")
         print(prompts)
         enc = self._tokenize(prompts, truncation=True, max_input_tokens=cfg.max_input_tokens)
 
@@ -178,8 +178,7 @@ class FalconGenerator:
             num_return_sequences=1,
             pad_token_id=self.pad_token_id,
             eos_token_id=self.eos_token_id,
-            use_cache=False,  # ✅
-            # **gen_kwargs  # 필요시
+            use_cache=False,  # Falcon 모델에서 필요할 수 있음
         )
         out_texts = self._postprocess(enc["input_ids"], out_ids, cfg.return_only_new_text)
         return out_texts

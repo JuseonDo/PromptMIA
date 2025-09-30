@@ -2,80 +2,128 @@ import os
 import re
 import json
 import fire
+from dotenv import load_dotenv
 from collections import Counter
 from datetime import datetime
 from typing import Dict, Tuple, List
 from Falcon.utils.model_utils import FalconGenerator, GenerateConfig
 
+# ORIGINAL = (
+#     "these birches can be found in many places in Europe - the photos is from a short trip to Baden-Baden in 2007. "
+#     "the clouds in the background are the messengers of the storm Kyrill. here are some more moments of the trip: Baden-Baden.\n"
+#     "-\n"
+#     "“ast/ray” is a bilingual wordplay: “ast” means “twig” in German. and while “Baden-Baden” sounds like wordplay, too, "
+#     "it is the actual name of a rather well-know spa town that also dates back to Roman times. “Bad” is the German word for “bath”.\n"
+#     "Mirror effect turned out nice. I like"
+# )
+
+# def build_quiz(target: str) -> Tuple[str, Dict[str, str], str]:
+#     target = target.lower()
+#     if target == "place":
+#         paragraph = ORIGINAL.replace("Baden-Baden", "( ___ )", 1)
+#         options = {"A": "Heidelberg", "B": "Dresden", "C": "Baden-Baden", "D": "Munich", "E": "Leipzig"}
+#         correct = "C"
+#     elif target == "year":
+#         paragraph = ORIGINAL.replace("2007", "( ___ )", 1)
+#         options = {"A": "2005", "B": "2006", "C": "2007", "D": "2008", "E": "2009"}
+#         correct = "C"
+#     elif target == "storm":
+#         paragraph = ORIGINAL.replace("Kyrill", "( ___ )", 1)
+#         options = {"A": "Xaver", "B": "Kyrill", "C": "Lothar", "D": "Sabine", "E": "Friederike"}
+#         correct = "B"
+#     elif target == "ast_meaning":
+#         paragraph = ORIGINAL.replace("“ast” means “twig”", "“ast” means “( ___ )”", 1)
+#         options = {"A": "twig", "B": "light", "C": "stone", "D": "river", "E": "path"}
+#         correct = "A"
+#     elif target == "bad_meaning":
+#         paragraph = ORIGINAL.replace("“Bad” is the German word for “bath”", "“Bad” is the German word for “( ___ )”", 1)
+#         options = {"A": "mountain", "B": "sea", "C": "river", "D": "bath", "E": "forest"}
+#         correct = "D"
+#     else:
+#         raise ValueError("target must be one of: place, year, storm, ast_meaning, bad_meaning")
+#     return paragraph, options, correct
+
 ORIGINAL = (
-    "these birches can be found in many places in Europe - the photos is from a short trip to Baden-Baden in 2007. "
-    "the clouds in the background are the messengers of the storm Kyrill. here are some more moments of the trip: Baden-Baden.\n"
-    "-\n"
-    "“ast/ray” is a bilingual wordplay: “ast” means “twig” in German. and while “Baden-Baden” sounds like wordplay, too, "
-    "it is the actual name of a rather well-know spa town that also dates back to Roman times. “Bad” is the German word for “bath”.\n"
-    "Mirror effect turned out nice. I like"
+    "Watch Survivor Redemption Island Season 22 Episode 11: A Mystery Package Online S22e11 Free Stream Megavideo\n\n"
+    "Article by StreamThatSeries\n\n"
+    "Horray!time for another dose of very exciting reality series with lots of twists.You must watch survivor redemption island season 22 episode 11 tonight "
+    "with a title of 'Mystery Package' coz surely this will stir things up on the merge tribe murlonio. "
+    "The show premiered on May 31, 2000 on CBS. It is hosted by veteran television personality Jeff Probst. "
+    "The first U.S. season of Survivor followed the Swedish series, but subsequently the show has introduced several twists. "
+    "Season 22 features the return of Rob Mariano and Russell Hantz. This is Russell's third time on the show and Rob's fourth."
 )
 
-# ---- helpers to build quiz ----
-def build_quiz(target: str) -> Tuple[str, Dict[str, str], str]:
+def build_quiz(target: str):
     target = target.lower()
-    if target == "place":
-        paragraph = ORIGINAL.replace("Baden-Baden", "( ___ )", 1)
-        options = {"A": "Heidelberg", "B": "Dresden", "C": "Baden-Baden", "D": "Munich", "E": "Leipzig"}
+    if target == "season":
+        paragraph = ORIGINAL.replace("Season 22", "Season ( ___ )", 1)
+        options = {"A": "20", "B": "21", "C": "22", "D": "23"}
         correct = "C"
-    elif target == "year":
-        paragraph = ORIGINAL.replace("2007", "( ___ )", 1)
-        options = {"A": "2005", "B": "2006", "C": "2007", "D": "2008", "E": "2009"}
+    elif target == "episode":
+        paragraph = ORIGINAL.replace("Episode 11", "Episode ( ___ )", 1)
+        options = {"A": "9", "B": "10", "C": "11", "D": "12"}
         correct = "C"
-    elif target == "storm":
-        paragraph = ORIGINAL.replace("Kyrill", "( ___ )", 1)
-        options = {"A": "Xaver", "B": "Kyrill", "C": "Lothar", "D": "Sabine", "E": "Friederike"}
-        correct = "B"
-    elif target == "ast_meaning":
-        paragraph = ORIGINAL.replace("“ast” means “twig”", "“ast” means “( ___ )”", 1)
-        options = {"A": "twig", "B": "light", "C": "stone", "D": "river", "E": "path"}
+    elif target == "episode_title":
+        paragraph = ORIGINAL.replace("'Mystery Package'", "'( ___ )'", 1)
+        options = {"A": 'Mystery Package', "B": "Rice Wars", "C": "Redemption Island", "D": "Final Showdown"}
         correct = "A"
-    elif target == "bad_meaning":
-        paragraph = ORIGINAL.replace("“Bad” is the German word for “bath”", "“Bad” is the German word for “( ___ )”", 1)
-        options = {"A": "mountain", "B": "sea", "C": "river", "D": "bath", "E": "forest"}
-        correct = "D"
+    elif target == "premiere_date":
+        paragraph = ORIGINAL.replace("May 31, 2000", "( ___ )", 1)
+        options = {"A": "May 28, 2000", "B": "May 31, 2000", "C": "June 1, 2000", "D": "June 15, 2000"}
+        correct = "B"
+    elif target == "host":
+        paragraph = ORIGINAL.replace("Jeff Probst", "( ___ )", 1)
+        options = {"A": "Phil Keoghan", "B": "Ryan Seacrest", "C": "Jeff Probst", "D": "Mark Burnett"}
+        correct = "C"
+    elif target == "rob_times":
+        paragraph = ORIGINAL.replace("Rob's fourth", "Rob's ( ___ )", 1)
+        options = {"A": "second", "B": "third", "C": "fourth", "D": "fifth"}
+        correct = "C"
+    elif target == "russell_times":
+        paragraph = ORIGINAL.replace("Russell's third", "Russell's ( ___ )", 1)
+        options = {"A": "second", "B": "third", "C": "fourth", "D": "fifth"}
+        correct = "B"
     else:
-        raise ValueError("target must be one of: place, year, storm, ast_meaning, bad_meaning")
+        raise ValueError("target must be one of: season, episode, episode_title, premiere_date, host, rob_times, russell_times")
     return paragraph, options, correct
 
 def make_plain_prompt(paragraph: str, options: Dict[str, str]) -> str:
-    opts_text = "  ".join([f"{k}. {v}" for k, v in options.items()])
+    opts_text = "\n".join([f"{k}. {v}" for k, v in options.items()])
     return (
-        "You are a concise QA assistant. Read the paragraph with ONE blank and choose the correct option.\n\n"
+        "Question: Read the text and select the correct answer.\n\n"
         f"{paragraph}\n\n"
-        f"Options: {opts_text}\n\n"
-        "Instruction: Answer with ONLY the single letter among A, B, C, D, E. No explanation."
+        f"{opts_text}\n\n"
+        "Instructions:\n"
+        "- Choose only ONE letter: A, B, C, D\n"
+        "- Do not write explanations\n"
+        "- Do not write full sentences\n\n"
+        "Answer:"
     )
 
-def make_messages(paragraph: str, options: Dict[str, str]) -> List[dict]:
-    opts_text = "  ".join([f"{k}. {v}" for k, v in options.items()])
+def make_messages(paragraph: str, options: Dict[str, str]):  
+    opts_text = "\n".join([f"{k}. {v}" for k, v in options.items()])
     user = (
-        "Read the paragraph with ONE blank and choose the correct option.\n\n"
         f"{paragraph}\n\n"
-        f"Options: {opts_text}\n\n"
-        "Answer with ONLY one letter among A, B, C, D, E."
+        f"{opts_text}\n\n"
+        "Choose one letter: A, B, C, D\n"
+        "Do not explain. Answer:"
     )
     return [
-        {"role": "system", "content": "You are a helpful, concise QA assistant."},
+        {"role": "system", "content": "You are a QA assistant. Answer with single letters only."},
         {"role": "user", "content": user},
     ]
 
-def extract_letter(s: str) -> str:
-    m = re.search(r"\b([A-E])\b", s.strip(), flags=re.IGNORECASE)
+def extract_letter(s: str) -> str:  # 정답 후보 추출 알고리즘
+    m = re.search(r"\b([A-D])\b", s.strip(), flags=re.IGNORECASE)
     if m:
         return m.group(1).upper()
     for ch in s:
-        if ch.upper() in "ABCDE":
+        if ch.upper() in "ABCD":
             return ch.upper()
     return "?"
 
 # ---- batching util ----
-def chunked(lst: List[str], n: int) -> List[List[str]]:
+def chunked(lst: List[str], n: int) -> List[List[str]]:  
     if n <= 0:
         return [lst]
     return [lst[i:i+n] for i in range(0, len(lst), n)]
@@ -86,12 +134,7 @@ def build_filename(
     samples: int,
     defaults: Dict[str, object],
     params: Dict[str, object],
-) -> str:
-    """
-    파일명 예: quiz_target=place__samples=32__temp:0.6__top_P:0.9__rep:1.05__mx:8.jsonl
-    - 디폴트와 같은 값은 생략
-    - top_p는 'top_P'로 표기(요청 사항)
-    """
+):
     tags = [f"quiz_target={target}", f"samples={samples}"]
     # 표기 키 매핑
     keymap = {
@@ -121,12 +164,12 @@ def build_filename(
 
 # ---- main entry ----
 def run(
-    target: str = "place",
+    target: str = "season",
     model_name: str = "tiiuae/falcon-7b-instruct",
     samples: int = 16,                 # 생성 샘플 개수
     batch_size: int = 8,               # 실제 inference 배치 크기
-    max_new_tokens: int = 8,
-    temperature: float = 0.6,
+    max_new_tokens: int = 3,
+    temperature: float = 0.1,
     top_p: float = 0.9,
     top_k: int = 0,
     repetition_penalty: float = 1.05,
@@ -134,11 +177,7 @@ def run(
     show_all: bool = True,
     seed: int = 0,
 ):
-    """
-    동일 프롬프트를 batch로 N개 넣어 샘플링하고, 입력 프롬프트 & 출력들을 JSONL로 저장.
-    저장 경로: os.path.join(os.getenv('workspace'), '/Falcon/results')
-    파일명에 비-디폴트 파라미터만 태그로 반영 (top_p -> top_P 등).
-    """
+
     # ---- build quiz ----
     paragraph, options, correct = build_quiz(target)
 
@@ -227,13 +266,14 @@ def run(
     }
     filename = build_filename(target, samples, defaults, params)
 
-    workspace = os.getenv("workspace")
-    if not workspace:
-        print("[WARN] environment variable 'workspace' is not set. Saving under current working directory root path.")
-        workspace = os.getcwd()
+    load_dotenv()
 
-    # NOTE: 요청에 따라 정확히 이 형태로 join (절대경로 주의)
-    save_dir = os.path.join(workspace, "/Falcon/results")
+    WORKSPACE = os.getenv("WORKSPACE")
+    if not WORKSPACE:
+        print("[WARN] environment variable 'WORKSPACE' is not set. Saving under current working directory root path.")
+        WORKSPACE = os.getcwd()
+
+    save_dir = os.getenv("RESULTS_DIR")
     os.makedirs(save_dir, exist_ok=True)
     save_path = os.path.join(save_dir, filename)
 
@@ -262,8 +302,18 @@ def run(
                 "output_choice": pred,     # 정제한 선택지 한 글자
             }
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
-
+    
     print(f"\n[INFO] Saved prompts & outputs to JSONL:\n{save_path}")
 
+    final_filename = os.path.join("/data2/PromptMIA/Falcon/results", "final_results.jsonl")
+    with open(final_filename, 'a') as f:
+        data = {
+            "predict": majority,
+            "correct": correct  
+        }
+        f.write(json.dumps(data) + '\n')
+    return 
+
 if __name__ == "__main__":
-    fire.Fire(run)
+    for i in range(5):
+        fire.Fire(run)

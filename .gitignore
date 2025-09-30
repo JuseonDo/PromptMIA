@@ -21,6 +21,7 @@ models/
 # temporary files
 .locks
 *.locks
+results/
 
 # OS
 .DS_Store
