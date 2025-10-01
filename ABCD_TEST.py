@@ -1,5 +1,4 @@
 from Falcon.utils.model_utils import FalconGenerator, GenerateConfig
-
 import os
 import re
 import json
@@ -47,55 +46,25 @@ ORIGINAL_TEXT = (
 
 class QuizBuilder:    
     QUIZ_CONFIGS = {
-        "season": {
+        "season_A": {
+            "replace": ("Season 22", "Season ( ___ )"),
+            "options": {"A": "22", "B": "21", "C": "20", "D": "23"},
+            "correct": "A"
+        },
+        "season_B": {
+            "replace": ("Season 22", "Season ( ___ )"),
+            "options": {"A": "20", "B": "22", "C": "21", "D": "23"},
+            "correct": "B"
+        },
+        "season_C": {
             "replace": ("Season 22", "Season ( ___ )"),
             "options": {"A": "20", "B": "21", "C": "22", "D": "23"},
             "correct": "C"
         },
-        "episode": {
-            "replace": ("Episode 11", "Episode ( ___ )"),
-            "options": {"A": "9", "B": "10", "C": "11", "D": "12"},
-            "correct": "C"
-        },
-        "episode_title": {
-            "replace": ("'Mystery Package'", "'( ___ )'"),
-            "options": {
-                "A": "Mystery Package",
-                "B": "Rice Wars",
-                "C": "Redemption Island",
-                "D": "Final Showdown"
-            },
-            "correct": "A"
-        },
-        "premiere_date": {
-            "replace": ("May 31, 2000", "( ___ )"),
-            "options": {
-                "A": "May 28, 2000",
-                "B": "May 31, 2000",
-                "C": "June 1, 2000",
-                "D": "June 15, 2000"
-            },
-            "correct": "B"
-        },
-        "host": {
-            "replace": ("Jeff Probst", "( ___ )"),
-            "options": {
-                "A": "Phil Keoghan",
-                "B": "Ryan Seacrest",
-                "C": "Jeff Probst",
-                "D": "Mark Burnett"
-            },
-            "correct": "C"
-        },
-        "rob_times": {
-            "replace": ("Rob's fourth", "Rob's ( ___ )"),
-            "options": {"A": "second", "B": "third", "C": "fourth", "D": "fifth"},
-            "correct": "C"
-        },
-        "russell_times": {
-            "replace": ("Russell's third", "Russell's ( ___ )"),
-            "options": {"A": "second", "B": "third", "C": "fourth", "D": "fifth"},
-            "correct": "B"
+        "season_D": {
+            "replace": ("Season 22", "Season ( ___ )"),
+            "options": {"A": "20", "B": "21", "C": "23", "D": "22"},
+            "correct": "D"
         }
     }
     
@@ -130,16 +99,16 @@ class PromptBuilder:
                 "role": "user",
                 "content": (
                     "The capital of France is ( ___ ).\n"
-                    "A. London\n"
-                    "B. Madrid\n"
+                    "A. Paris\n"
+                    "B. London\n"
                     "C. Berlin\n"
-                    "D. Paris\n\n"
+                    "D. Madrid\n\n"
                     "Your answer:"
                 )
             },
             {
                 "role": "assistant",
-                "content": "D"
+                "content": "A"
             },
             {
                 "role": "user",
@@ -155,6 +124,36 @@ class PromptBuilder:
             {
                 "role": "assistant",
                 "content": "B"
+            },
+            {
+                "role": "user",
+                "content": (
+                    "The largest ocean on Earth is ( ___ ).\n"
+                    "A. Atlantic Ocean\n"
+                    "B. Indian Ocean\n"
+                    "C. Pacific Ocean\n"
+                    "D. Arctic Ocean\n\n"
+                    "Your answer:"
+                )
+            },
+            {
+                "role": "assistant",
+                "content": "C"
+            },
+            {
+                "role": "user",
+                "content": (
+                    "The sun rises in the ( ___ ).\n"
+                    "A. North\n"
+                    "B. South\n"
+                    "C. West\n"
+                    "D. East\n\n"
+                    "Your answer:"
+                )
+            },
+            {
+                "role": "assistant",
+                "content": "D"
             },
             {
                 "role": "user",
@@ -250,7 +249,7 @@ class FileManager:
     @staticmethod
     def append_final_result(target: str, majority: str, correct: str, results_dir: str) -> None:
         """Append final result to summary file with target label."""
-        final_path = os.path.join(results_dir, "final_results7.jsonl")
+        final_path = os.path.join(results_dir, "final_results_ABCD.jsonl")
         os.makedirs(results_dir, exist_ok=True)
         
         with open(final_path, "a", encoding="utf-8") as f:
@@ -370,7 +369,7 @@ def run(
     seed: int = 0,
     debug_mode: bool = False,
     num_repeats: int = 15,
-    sub_folder: str = "test7"
+    sub_folder: str = "testABCD",
 ) -> None:
 
     # Load environment
@@ -390,7 +389,7 @@ def run(
     gen = FalconGenerator(model_name=model_name)
     
     # Define all targets
-    targets = ["season"]
+    targets = ["season_A", "season_B", "season_C", "season_D"]
     
     # Run experiments
     total_experiments = len(targets) * num_repeats
@@ -427,7 +426,7 @@ def run(
     print("=" * 70)
     print(f"Total experiments: {total_experiments}")
     print(f"Results saved to: {results_dir}")
-    print(f"Summary file: {os.path.join(results_dir, 'final_results7.jsonl')}")
+    print(f"Summary file: {os.path.join(results_dir, 'final_results_ABCD.jsonl')}")
     print("=" * 70 + "\n")
 
 

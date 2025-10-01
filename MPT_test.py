@@ -1,4 +1,4 @@
-from Falcon.utils.model_utils import FalconGenerator, GenerateConfig
+from MPT.utils.model_utils import MPTGenerator, GenerateConfig
 
 import os
 import re
@@ -31,70 +31,109 @@ PARAM_KEY_MAP = {
 
 # Constants
 ORIGINAL_TEXT = (
-    "Watch Survivor Redemption Island Season 22 Episode 11: A Mystery Package "
-    "Online S22e11 Free Stream Megavideo\n\n"
-    "Article by StreamThatSeries\n\n"
-    "Horray!time for another dose of very exciting reality series with lots of twists."
-    "You must watch survivor redemption island season 22 episode 11 tonight "
-    "with a title of 'Mystery Package' coz surely this will stir things up on the "
-    "merge tribe murlonio. The show premiered on May 31, 2000 on CBS. "
-    "It is hosted by veteran television personality Jeff Probst. "
-    "The first U.S. season of Survivor followed the Swedish series, but subsequently "
-    "the show has introduced several twists. Season 22 features the return of "
-    "Rob Mariano and Russell Hantz. This is Russell's third time on the show and "
-    "Rob's fourth."
+    "Beginners BBQ Class Taking Place in Missoula!\n"
+    "Do you want to get better at making delicious BBQ? You will have the opportunity, "
+    "put this on your calendar now. Thursday, September 22nd join World Class BBQ Champion, "
+    "Tony Balay from Lonestar Smoke Rangers. He will be teaching a beginner level class "
+    "for everyone who wants to get better with their culinary skills.\n"
+    "He will teach you everything you need to know to compete in a KCBS BBQ competition, "
+    "including techniques, recipes, timelines, meat selection and trimming, plus smoker "
+    "and fire information.\n"
+    "The cost to be in the class is $35 per person, and for spectators it is free. "
+    "Included in the cost will be either a t-shirt or apron and you will be tasting "
+    "samples of each meat that is prepared."
 )
 
 class QuizBuilder:    
     QUIZ_CONFIGS = {
-        "season": {
-            "replace": ("Season 22", "Season ( ___ )"),
-            "options": {"A": "20", "B": "21", "C": "22", "D": "23"},
-            "correct": "C"
-        },
-        "episode": {
-            "replace": ("Episode 11", "Episode ( ___ )"),
-            "options": {"A": "9", "B": "10", "C": "11", "D": "12"},
-            "correct": "C"
-        },
-        "episode_title": {
-            "replace": ("'Mystery Package'", "'( ___ )'"),
+        "event_location": {
+            "replace": ("Missoula", "( ___ )"),
             "options": {
-                "A": "Mystery Package",
-                "B": "Rice Wars",
-                "C": "Redemption Island",
-                "D": "Final Showdown"
+                "A": "Helena",
+                "B": "Billings", 
+                "C": "Missoula",
+                "D": "Bozeman"
             },
-            "correct": "A"
+            "correct": "C"
         },
-        "premiere_date": {
-            "replace": ("May 31, 2000", "( ___ )"),
+        "event_day": {
+            "replace": ("Thursday", "( ___ )"),
             "options": {
-                "A": "May 28, 2000",
-                "B": "May 31, 2000",
-                "C": "June 1, 2000",
-                "D": "June 15, 2000"
+                "A": "Wednesday",
+                "B": "Thursday",
+                "C": "Friday",
+                "D": "Saturday"
             },
             "correct": "B"
         },
-        "host": {
-            "replace": ("Jeff Probst", "( ___ )"),
+        "event_date": {
+            "replace": ("September 22nd", "( ___ )"),
             "options": {
-                "A": "Phil Keoghan",
-                "B": "Ryan Seacrest",
-                "C": "Jeff Probst",
-                "D": "Mark Burnett"
+                "A": "September 21st",
+                "B": "September 22nd",
+                "C": "September 23rd",
+                "D": "September 29th"
+            },
+            "correct": "B"
+        },
+        "instructor_name": {
+            "replace": ("Tony Balay", "( ___ )"),
+            "options": {
+                "A": "Tony Blair",
+                "B": "Tony Balay",
+                "C": "Tony Bennett",
+                "D": "Tony Parker"
+            },
+            "correct": "B"
+        },
+        "team_name": {
+            "replace": ("Lonestar Smoke Rangers", "( ___ )"),
+            "options": {
+                "A": "Texas BBQ Masters",
+                "B": "Smoke Legends",
+                "C": "Lonestar Smoke Rangers",
+                "D": "BBQ Champions United"
             },
             "correct": "C"
         },
-        "rob_times": {
-            "replace": ("Rob's fourth", "Rob's ( ___ )"),
-            "options": {"A": "second", "B": "third", "C": "fourth", "D": "fifth"},
+        "competition_org": {
+            "replace": ("KCBS", "( ___ )"),
+            "options": {
+                "A": "KCBS",
+                "B": "IBCA",
+                "C": "MBN",
+                "D": "SCA"
+            },
+            "correct": "A"
+        },
+        "class_cost": {
+            "replace": ("$35", "( ___ )"),
+            "options": {
+                "A": "$25",
+                "B": "$30",
+                "C": "$35",
+                "D": "$40"
+            },
             "correct": "C"
         },
-        "russell_times": {
-            "replace": ("Russell's third", "Russell's ( ___ )"),
-            "options": {"A": "second", "B": "third", "C": "fourth", "D": "fifth"},
+        "spectator_cost": {
+            "replace": ("free", "( ___ )"),
+            "options": {
+                "A": "$5",
+                "B": "$10",
+                "C": "free",
+                "D": "$15"
+            },
+            "correct": "C"
+        },
+        "included_items": {
+            "replace": ("t-shirt or apron", "( ___ )"),
+            "options": {
+                "A": "hat or gloves",
+                "B": "t-shirt or apron",
+                "C": "cookbook or hat",
+                "D": "gloves or tongs"
+            },
             "correct": "B"
         }
     }
@@ -112,13 +151,12 @@ class QuizBuilder:
         return paragraph, config["options"], config["correct"]
 
 
-
 class PromptBuilder:
-    """Build chat messages with system prompt."""
+    """Build chat messages with system prompt for MPT."""
 
     @staticmethod
     def build_chat_messages(paragraph: str, options: Dict[str, str]) -> List[Dict]:
-        """Build chat messages with few-shot examples."""
+        """Build chat messages with few-shot examples for MPT-7B-Chat."""
         options_text = "\n".join([f"{k}. {v}" for k, v in options.items()])
         
         return [
@@ -250,7 +288,7 @@ class FileManager:
     @staticmethod
     def append_final_result(target: str, majority: str, correct: str, results_dir: str) -> None:
         """Append final result to summary file with target label."""
-        final_path = os.path.join(results_dir, "final_results7.jsonl")
+        final_path = os.path.join(results_dir, "final_results_mpt.jsonl")
         os.makedirs(results_dir, exist_ok=True)
         
         with open(final_path, "a", encoding="utf-8") as f:
@@ -278,7 +316,7 @@ def run_single_experiment(
     show_all: bool,
     seed: int,
     debug_mode: bool,
-    gen: FalconGenerator,
+    gen: MPTGenerator,
     results_dir: str,
 ) -> Dict:
     """Run a single quiz experiment and return results."""
@@ -297,11 +335,9 @@ def run_single_experiment(
         do_sample=True,
     )
     
-    # Build chat messages and apply template
+    # Build chat messages and format for MPT
     messages = PromptBuilder.build_chat_messages(paragraph, options)
-    prompt_text = gen.tokenizer.apply_chat_template(
-        messages, tokenize=False, add_generation_prompt=True
-    )
+    prompt_text = gen.format_chat_prompt(messages)
     
     # Set seed if specified
     if seed is not None and seed != 0:
@@ -314,7 +350,7 @@ def run_single_experiment(
     
     print(f"  Generating {samples} samples...")
     for i, chunk in enumerate(chunked(prompts, batch_size)):
-        batch_outputs = gen.generate_batch(chunk, cfg)
+        batch_outputs = gen.generate_batch(chunk, cfg, use_chat_format=False)
         raw_outputs.extend(batch_outputs)
     
     # Analyze responses
@@ -358,7 +394,7 @@ def run_single_experiment(
 
 
 def run(
-    model_name: str = "tiiuae/falcon-7b-instruct",
+    model_name: str = "mosaicml/mpt-7b-chat",
     samples: int = 32,
     batch_size: int = 16,
     max_new_tokens: int = 5,
@@ -369,28 +405,33 @@ def run(
     show_all: bool = False,
     seed: int = 0,
     debug_mode: bool = False,
-    num_repeats: int = 15,
-    sub_folder: str = "test7"
+    num_repeats: int = 10,
+    sub_folder: str = "test_mpt1"
 ) -> None:
 
     # Load environment
     load_dotenv()
-    base_results_dir = os.getenv("RESULTS_DIR").rstrip("/")
+    base_results_dir = os.getenv("RESULTS_DIR_MPT").rstrip("/")
     results_dir = os.path.join(base_results_dir, sub_folder)
     
     # Initialize model once
     print("=" * 70)
-    print("INITIALIZING MODEL")
+    print("INITIALIZING MPT MODEL")
     print("=" * 70)
     print(f"Model: {model_name}")
     print(f"Samples per experiment: {samples}")
     print(f"Repeats per target: {num_repeats}")
     print("=" * 70 + "\n")
     
-    gen = FalconGenerator(model_name=model_name)
+    gen = MPTGenerator(
+        model_name=model_name,
+        cache_env_key="MODEL_CACHE_DIR"
+    )
     
     # Define all targets
-    targets = ["season"]
+    targets = ["event_location", "event_day", "event_date", "instructor_name",
+               "team_name", "competition_org", "class_cost", "spectator_cost",
+               "included_items"]
     
     # Run experiments
     total_experiments = len(targets) * num_repeats
@@ -427,7 +468,7 @@ def run(
     print("=" * 70)
     print(f"Total experiments: {total_experiments}")
     print(f"Results saved to: {results_dir}")
-    print(f"Summary file: {os.path.join(results_dir, 'final_results7.jsonl')}")
+    print(f"Summary file: {os.path.join(results_dir, 'final_results_mpt.jsonl')}")
     print("=" * 70 + "\n")
 
 

@@ -369,8 +369,8 @@ def run(
     show_all: bool = False,
     seed: int = 0,
     debug_mode: bool = False,
-    num_repeats: int = 10,
-    sub_folder: str = "test6"
+    num_repeats: int = 15,
+    sub_folder: str = "test7"
 ) -> None:
 
     # Load environment
@@ -390,7 +390,7 @@ def run(
     gen = FalconGenerator(model_name=model_name)
     
     # Define all targets
-    targets = ["season", "episode", "episode_title", "premiere_date", "host", "rob_times", "russell_times"]
+    targets = ["season"]
     
     # Run experiments
     total_experiments = len(targets) * num_repeats

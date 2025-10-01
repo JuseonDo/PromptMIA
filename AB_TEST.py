@@ -47,57 +47,101 @@ ORIGINAL_TEXT = (
 
 class QuizBuilder:    
     QUIZ_CONFIGS = {
-        "season": {
+        "season_A": {
             "replace": ("Season 22", "Season ( ___ )"),
-            "options": {"A": "20", "B": "21", "C": "22", "D": "23"},
-            "correct": "C"
+            "options": {"A": "22", "B": "21"},
+            "correct": "A"
         },
-        "episode": {
+        "season_B": {
+            "replace": ("Season 22", "Season ( ___ )"),
+            "options": {"A": "21", "B": "22"},
+            "correct": "B"
+        },
+        
+        "episode_A": {
             "replace": ("Episode 11", "Episode ( ___ )"),
-            "options": {"A": "9", "B": "10", "C": "11", "D": "12"},
-            "correct": "C"
+            "options": {"A": "11", "B": "10"},
+            "correct": "A"
         },
-        "episode_title": {
+        "episode_B": {
+            "replace": ("Episode 11", "Episode ( ___ )"),
+            "options": {"A": "10", "B": "11"},
+            "correct": "B"
+        },
+        
+        "episode_title_A": {
             "replace": ("'Mystery Package'", "'( ___ )'"),
             "options": {
                 "A": "Mystery Package",
-                "B": "Rice Wars",
-                "C": "Redemption Island",
-                "D": "Final Showdown"
+                "B": "Rice Wars"
             },
             "correct": "A"
         },
-        "premiere_date": {
+        "episode_title_B": {
+            "replace": ("'Mystery Package'", "'( ___ )'"),
+            "options": {
+                "A": "Rice Wars",
+                "B": "Mystery Package"
+            },
+            "correct": "B"
+        },
+        
+        "premiere_date_A": {
+            "replace": ("May 31, 2000", "( ___ )"),
+            "options": {
+                "A": "May 31, 2000",
+                "B": "May 28, 2000"
+            },
+            "correct": "A"
+        },
+        "premiere_date_B": {
             "replace": ("May 31, 2000", "( ___ )"),
             "options": {
                 "A": "May 28, 2000",
-                "B": "May 31, 2000",
-                "C": "June 1, 2000",
-                "D": "June 15, 2000"
+                "B": "May 31, 2000"
             },
             "correct": "B"
         },
-        "host": {
+        
+        "host_A": {
+            "replace": ("Jeff Probst", "( ___ )"),
+            "options": {
+                "A": "Jeff Probst",
+                "B": "Phil Keoghan"
+            },
+            "correct": "A"
+        },
+        "host_B": {
             "replace": ("Jeff Probst", "( ___ )"),
             "options": {
                 "A": "Phil Keoghan",
-                "B": "Ryan Seacrest",
-                "C": "Jeff Probst",
-                "D": "Mark Burnett"
+                "B": "Jeff Probst"
             },
-            "correct": "C"
+            "correct": "B"
         },
-        "rob_times": {
+        
+        "rob_times_A": {
             "replace": ("Rob's fourth", "Rob's ( ___ )"),
-            "options": {"A": "second", "B": "third", "C": "fourth", "D": "fifth"},
-            "correct": "C"
+            "options": {"A": "fourth", "B": "third"},
+            "correct": "A"
         },
-        "russell_times": {
+        "rob_times_B": {
+            "replace": ("Rob's fourth", "Rob's ( ___ )"),
+            "options": {"A": "third", "B": "fourth"},
+            "correct": "B"
+        },
+        
+        "russell_times_A": {
             "replace": ("Russell's third", "Russell's ( ___ )"),
-            "options": {"A": "second", "B": "third", "C": "fourth", "D": "fifth"},
+            "options": {"A": "third", "B": "second"},
+            "correct": "A"
+        },
+        "russell_times_B": {
+            "replace": ("Russell's third", "Russell's ( ___ )"),
+            "options": {"A": "second", "B": "third"},
             "correct": "B"
         }
-    }
+}
     
     @classmethod
     def build(cls, target: str) -> Tuple[str, Dict[str, str], str]:
@@ -210,7 +254,7 @@ class FileManager:
         defaults: Dict,
         params: Dict
     ) -> str:
-        tags = [f"quiz_target={target}", f"samples={samples}"]
+        tags = [f"[REVERSE] quiz_target={target}", f"samples={samples}"]
         
         for key, value in params.items():
             if key not in defaults or value == defaults[key]:
@@ -250,7 +294,7 @@ class FileManager:
     @staticmethod
     def append_final_result(target: str, majority: str, correct: str, results_dir: str) -> None:
         """Append final result to summary file with target label."""
-        final_path = os.path.join(results_dir, "final_results7.jsonl")
+        final_path = os.path.join(results_dir, "[AB]final_results.jsonl")
         os.makedirs(results_dir, exist_ok=True)
         
         with open(final_path, "a", encoding="utf-8") as f:
@@ -370,7 +414,7 @@ def run(
     seed: int = 0,
     debug_mode: bool = False,
     num_repeats: int = 15,
-    sub_folder: str = "test7"
+    sub_folder: str = "testA/B"
 ) -> None:
 
     # Load environment
@@ -390,7 +434,9 @@ def run(
     gen = FalconGenerator(model_name=model_name)
     
     # Define all targets
-    targets = ["season"]
+    targets = ["season_A", "season_B", "episode_A", "episode_B",
+               "episode_title_A", "episode_title_B", "premiere_date_A", "premiere_date_B",
+               "host_A", "host_B", "rob_times_A", "rob_times_B", "russell_times_A", "russell_times_B"]
     
     # Run experiments
     total_experiments = len(targets) * num_repeats
@@ -427,7 +473,7 @@ def run(
     print("=" * 70)
     print(f"Total experiments: {total_experiments}")
     print(f"Results saved to: {results_dir}")
-    print(f"Summary file: {os.path.join(results_dir, 'final_results7.jsonl')}")
+    print(f"Summary file: {os.path.join(results_dir, 'final_results_AB.jsonl')}")
     print("=" * 70 + "\n")
 
 

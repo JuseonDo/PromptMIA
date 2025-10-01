@@ -1,4 +1,4 @@
-from Falcon.utils.model_utils import FalconGenerator, GenerateConfig
+from Pythia.utils.model_utils import PythiaGenerator, GenerateConfig
 
 import os
 import re
@@ -49,53 +49,53 @@ class QuizBuilder:
     QUIZ_CONFIGS = {
         "season": {
             "replace": ("Season 22", "Season ( ___ )"),
-            "options": {"A": "20", "B": "21", "C": "22", "D": "23"},
-            "correct": "C"
+            "options": {"A": "23", "B": "22", "C": "21", "D": "20"},
+            "correct": "B"
         },
         "episode": {
             "replace": ("Episode 11", "Episode ( ___ )"),
-            "options": {"A": "9", "B": "10", "C": "11", "D": "12"},
-            "correct": "C"
+            "options": {"A": "12", "B": "11", "C": "10", "D": "9"},
+            "correct": "B"
         },
         "episode_title": {
             "replace": ("'Mystery Package'", "'( ___ )'"),
             "options": {
-                "A": "Mystery Package",
-                "B": "Rice Wars",
-                "C": "Redemption Island",
-                "D": "Final Showdown"
+                "A": "Final Showdown",
+                "B": "Redemption Island",
+                "C": "Rice Wars",
+                "D": "Mystery Package"
             },
-            "correct": "A"
+            "correct": "D"
         },
         "premiere_date": {
             "replace": ("May 31, 2000", "( ___ )"),
             "options": {
-                "A": "May 28, 2000",
-                "B": "May 31, 2000",
-                "C": "June 1, 2000",
-                "D": "June 15, 2000"
+                "A": "June 15, 2000",
+                "B": "June 1, 2000",
+                "C": "May 31, 2000",
+                "D": "May 28, 2000"
             },
-            "correct": "B"
+            "correct": "C"
         },
         "host": {
             "replace": ("Jeff Probst", "( ___ )"),
             "options": {
-                "A": "Phil Keoghan",
-                "B": "Ryan Seacrest",
-                "C": "Jeff Probst",
-                "D": "Mark Burnett"
+                "A": "Mark Burnett",
+                "B": "Jeff Probst",
+                "C": "Ryan Seacrest",
+                "D": "Phil Keoghan"
             },
-            "correct": "C"
+            "correct": "B"
         },
         "rob_times": {
             "replace": ("Rob's fourth", "Rob's ( ___ )"),
-            "options": {"A": "second", "B": "third", "C": "fourth", "D": "fifth"},
-            "correct": "C"
+            "options": {"A": "fifth", "B": "fourth", "C": "third", "D": "second"},
+            "correct": "B"
         },
         "russell_times": {
             "replace": ("Russell's third", "Russell's ( ___ )"),
-            "options": {"A": "second", "B": "third", "C": "fourth", "D": "fifth"},
-            "correct": "B"
+            "options": {"A": "fifth", "B": "fourth", "C": "third", "D": "second"},
+            "correct": "C"
         }
     }
     
@@ -112,59 +112,34 @@ class QuizBuilder:
         return paragraph, config["options"], config["correct"]
 
 
-
 class PromptBuilder:
-    """Build chat messages with system prompt."""
+    """Build prompts for Pythia model."""
 
     @staticmethod
-    def build_chat_messages(paragraph: str, options: Dict[str, str]) -> List[Dict]:
-        """Build chat messages with few-shot examples."""
+    def build_fewshot_prompt(paragraph: str, options: Dict[str, str]) -> str:
+        """Build few-shot prompt for Pythia (no chat template)."""
         options_text = "\n".join([f"{k}. {v}" for k, v in options.items()])
         
-        return [
-            {
-                "role": "system",
-                "content": "You answer multiple choice questions with only a single letter."
-            },
-            {
-                "role": "user",
-                "content": (
-                    "The capital of France is ( ___ ).\n"
-                    "A. London\n"
-                    "B. Madrid\n"
-                    "C. Berlin\n"
-                    "D. Paris\n\n"
-                    "Your answer:"
-                )
-            },
-            {
-                "role": "assistant",
-                "content": "D"
-            },
-            {
-                "role": "user",
-                "content": (
-                    "2 + 2 = ( ___ )\n"
-                    "A. 3\n"
-                    "B. 4\n"
-                    "C. 5\n"
-                    "D. 6\n\n"
-                    "Your answer:"
-                )
-            },
-            {
-                "role": "assistant",
-                "content": "B"
-            },
-            {
-                "role": "user",
-                "content": (
-                    f"{paragraph}\n\n"
-                    f"{options_text}\n\n"
-                    "Your answer:"
-                )
-            }
-        ]
+        prompt = (
+            "Answer multiple choice questions with only a single letter.\n\n"
+            "Question: The capital of France is ( ___ ).\n"
+            "A. London\n"
+            "B. Madrid\n"
+            "C. Berlin\n"
+            "D. Paris\n"
+            "Answer: D\n\n"
+            "Question: 2 + 2 = ( ___ )\n"
+            "A. 3\n"
+            "B. 4\n"
+            "C. 5\n"
+            "D. 6\n"
+            "Answer: B\n\n"
+            f"Question: {paragraph}\n"
+            f"{options_text}\n"
+            "Answer:"
+        )
+        
+        return prompt
 
 
 class ResponseAnalyzer:
@@ -250,7 +225,7 @@ class FileManager:
     @staticmethod
     def append_final_result(target: str, majority: str, correct: str, results_dir: str) -> None:
         """Append final result to summary file with target label."""
-        final_path = os.path.join(results_dir, "final_results7.jsonl")
+        final_path = os.path.join(results_dir, "final_results1.jsonl")
         os.makedirs(results_dir, exist_ok=True)
         
         with open(final_path, "a", encoding="utf-8") as f:
@@ -278,7 +253,7 @@ def run_single_experiment(
     show_all: bool,
     seed: int,
     debug_mode: bool,
-    gen: FalconGenerator,
+    gen: PythiaGenerator,
     results_dir: str,
 ) -> Dict:
     """Run a single quiz experiment and return results."""
@@ -297,16 +272,15 @@ def run_single_experiment(
         do_sample=True,
     )
     
-    # Build chat messages and apply template
-    messages = PromptBuilder.build_chat_messages(paragraph, options)
-    prompt_text = gen.tokenizer.apply_chat_template(
-        messages, tokenize=False, add_generation_prompt=True
-    )
+    # Build prompt (Pythia doesn't use chat template)
+    prompt_text = PromptBuilder.build_fewshot_prompt(paragraph, options)
     
     # Set seed if specified
     if seed is not None and seed != 0:
         import torch
         torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
     
     # Generate responses in batches
     prompts = [prompt_text] * samples
@@ -358,7 +332,7 @@ def run_single_experiment(
 
 
 def run(
-    model_name: str = "tiiuae/falcon-7b-instruct",
+    model_name: str = "EleutherAI/pythia-6.9b",
     samples: int = 32,
     batch_size: int = 16,
     max_new_tokens: int = 5,
@@ -369,28 +343,28 @@ def run(
     show_all: bool = False,
     seed: int = 0,
     debug_mode: bool = False,
-    num_repeats: int = 15,
-    sub_folder: str = "test7"
+    num_repeats: int = 10,
+    sub_folder: str = "pythia_test1"
 ) -> None:
 
     # Load environment
     load_dotenv()
-    base_results_dir = os.getenv("RESULTS_DIR").rstrip("/")
+    base_results_dir = os.getenv("RESULTS_DIR_PYTHIA").rstrip("/")
     results_dir = os.path.join(base_results_dir, sub_folder)
     
     # Initialize model once
     print("=" * 70)
-    print("INITIALIZING MODEL")
+    print("INITIALIZING PYTHIA MODEL")
     print("=" * 70)
     print(f"Model: {model_name}")
     print(f"Samples per experiment: {samples}")
     print(f"Repeats per target: {num_repeats}")
     print("=" * 70 + "\n")
     
-    gen = FalconGenerator(model_name=model_name)
+    gen = PythiaGenerator(model_name=model_name, cache_env_key="MODEL_CACHE_DIR")
     
     # Define all targets
-    targets = ["season"]
+    targets = ["season", "episode", "episode_title", "premiere_date", "host", "rob_times", "russell_times"]
     
     # Run experiments
     total_experiments = len(targets) * num_repeats
@@ -427,7 +401,7 @@ def run(
     print("=" * 70)
     print(f"Total experiments: {total_experiments}")
     print(f"Results saved to: {results_dir}")
-    print(f"Summary file: {os.path.join(results_dir, 'final_results7.jsonl')}")
+    print(f"Summary file: {os.path.join(results_dir, 'final_results.jsonl')}")
     print("=" * 70 + "\n")
 
 

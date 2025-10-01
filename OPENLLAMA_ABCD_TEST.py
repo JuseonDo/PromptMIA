@@ -1,5 +1,4 @@
-from Falcon.utils.model_utils import FalconGenerator, GenerateConfig
-
+from OPENLLAMA.utils.model_utils import OpenLlamaGenerator, GenerateConfig
 import os
 import re
 import json
@@ -47,55 +46,25 @@ ORIGINAL_TEXT = (
 
 class QuizBuilder:    
     QUIZ_CONFIGS = {
-        "season": {
+        "season_A": {
+            "replace": ("Season 22", "Season ( ___ )"),
+            "options": {"A": "22", "B": "21", "C": "20", "D": "23"},
+            "correct": "A"
+        },
+        "season_B": {
+            "replace": ("Season 22", "Season ( ___ )"),
+            "options": {"A": "20", "B": "22", "C": "21", "D": "23"},
+            "correct": "B"
+        },
+        "season_C": {
             "replace": ("Season 22", "Season ( ___ )"),
             "options": {"A": "20", "B": "21", "C": "22", "D": "23"},
             "correct": "C"
         },
-        "episode": {
-            "replace": ("Episode 11", "Episode ( ___ )"),
-            "options": {"A": "9", "B": "10", "C": "11", "D": "12"},
-            "correct": "C"
-        },
-        "episode_title": {
-            "replace": ("'Mystery Package'", "'( ___ )'"),
-            "options": {
-                "A": "Mystery Package",
-                "B": "Rice Wars",
-                "C": "Redemption Island",
-                "D": "Final Showdown"
-            },
-            "correct": "A"
-        },
-        "premiere_date": {
-            "replace": ("May 31, 2000", "( ___ )"),
-            "options": {
-                "A": "May 28, 2000",
-                "B": "May 31, 2000",
-                "C": "June 1, 2000",
-                "D": "June 15, 2000"
-            },
-            "correct": "B"
-        },
-        "host": {
-            "replace": ("Jeff Probst", "( ___ )"),
-            "options": {
-                "A": "Phil Keoghan",
-                "B": "Ryan Seacrest",
-                "C": "Jeff Probst",
-                "D": "Mark Burnett"
-            },
-            "correct": "C"
-        },
-        "rob_times": {
-            "replace": ("Rob's fourth", "Rob's ( ___ )"),
-            "options": {"A": "second", "B": "third", "C": "fourth", "D": "fifth"},
-            "correct": "C"
-        },
-        "russell_times": {
-            "replace": ("Russell's third", "Russell's ( ___ )"),
-            "options": {"A": "second", "B": "third", "C": "fourth", "D": "fifth"},
-            "correct": "B"
+        "season_D": {
+            "replace": ("Season 22", "Season ( ___ )"),
+            "options": {"A": "20", "B": "21", "C": "23", "D": "22"},
+            "correct": "D"
         }
     }
     
@@ -250,7 +219,7 @@ class FileManager:
     @staticmethod
     def append_final_result(target: str, majority: str, correct: str, results_dir: str) -> None:
         """Append final result to summary file with target label."""
-        final_path = os.path.join(results_dir, "final_results7.jsonl")
+        final_path = os.path.join(results_dir, "final_results_ABCD.jsonl")
         os.makedirs(results_dir, exist_ok=True)
         
         with open(final_path, "a", encoding="utf-8") as f:
@@ -278,7 +247,7 @@ def run_single_experiment(
     show_all: bool,
     seed: int,
     debug_mode: bool,
-    gen: FalconGenerator,
+    gen: OpenLlamaGenerator,
     results_dir: str,
 ) -> Dict:
     """Run a single quiz experiment and return results."""
@@ -358,7 +327,7 @@ def run_single_experiment(
 
 
 def run(
-    model_name: str = "tiiuae/falcon-7b-instruct",
+    model_name: str = "openlm-research/open_llama_7b",
     samples: int = 32,
     batch_size: int = 16,
     max_new_tokens: int = 5,
@@ -370,13 +339,15 @@ def run(
     seed: int = 0,
     debug_mode: bool = False,
     num_repeats: int = 15,
-    sub_folder: str = "test7"
+    sub_folder: str = "testABCD",
 ) -> None:
 
     # Load environment
     load_dotenv()
-    base_results_dir = os.getenv("RESULTS_DIR").rstrip("/")
-    results_dir = os.path.join(base_results_dir, sub_folder)
+    
+    # OpenLlama용 results 디렉토리 설정
+    workspace ="/data2/PromptMIA"
+    results_dir = os.path.join(workspace, "OPENLLAMA", "results", sub_folder)
     
     # Initialize model once
     print("=" * 70)
@@ -387,10 +358,10 @@ def run(
     print(f"Repeats per target: {num_repeats}")
     print("=" * 70 + "\n")
     
-    gen = FalconGenerator(model_name=model_name)
+    gen = OpenLlamaGenerator(model_name=model_name)
     
     # Define all targets
-    targets = ["season"]
+    targets = ["season_A", "season_B", "season_C", "season_D"]
     
     # Run experiments
     total_experiments = len(targets) * num_repeats
@@ -427,7 +398,7 @@ def run(
     print("=" * 70)
     print(f"Total experiments: {total_experiments}")
     print(f"Results saved to: {results_dir}")
-    print(f"Summary file: {os.path.join(results_dir, 'final_results7.jsonl')}")
+    print(f"Summary file: {os.path.join(results_dir, 'final_results_ABCD.jsonl')}")
     print("=" * 70 + "\n")
 
 
