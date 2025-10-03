@@ -45,8 +45,10 @@ ORIGINAL_TEXT = (
     "Rob's fourth."
 )
 
-class QuizBuilder:    
-    QUIZ_CONFIGS = {
+class QuizBuilder:
+    """Builds quiz questions from the original text."""
+    
+    QUIZ_CONFIGS = {  # season, episode, episode_title, premiere_date, host, rob_times, russell_times
         "season": {
             "replace": ("Season 22", "Season ( ___ )"),
             "options": {"A": "20", "B": "21", "C": "22", "D": "23"},
@@ -248,13 +250,13 @@ class FileManager:
                 f.write(json.dumps(record, ensure_ascii=False) + "\n")
     
     @staticmethod
-    def append_final_result(target: str, majority: str, correct: str, results_dir: str) -> None:
-        """Append final result to summary file with target label."""
-        final_path = os.path.join(results_dir, "final_results7.jsonl")
+    def append_final_result(majority: str, correct: str, results_dir: str) -> None:
+        """Append final result to summary file."""
+        final_path = os.path.join(results_dir, "final_results4.jsonl")
         os.makedirs(results_dir, exist_ok=True)
         
         with open(final_path, "a", encoding="utf-8") as f:
-            data = {"target": target, "predict": majority, "correct": correct}
+            data = {"predict": majority, "correct": correct}
             f.write(json.dumps(data) + "\n")
 
 
@@ -265,28 +267,45 @@ def chunked(lst: List, n: int) -> List[List]:
     return [lst[i:i + n] for i in range(0, len(lst), n)]
 
 
-def run_single_experiment(
-    target: str,
-    model_name: str,
-    samples: int,
-    batch_size: int,
-    max_new_tokens: int,
-    temperature: float,
-    top_p: float,
-    top_k: int,
-    repetition_penalty: float,
-    show_all: bool,
-    seed: int,
-    debug_mode: bool,
-    gen: FalconGenerator,
-    results_dir: str,
-) -> Dict:
-    """Run a single quiz experiment and return results."""
+def run(
+    target: str = "year",
+    model_name: str = "tiiuae/falcon-7b-instruct",
+    samples: int = 16,
+    batch_size: int = 8,
+    max_new_tokens: int = 5,  # 2에서 5로 기본값 변경
+    temperature: float = 0.3,  # 0.6에서 0.3으로 낮춤 (더 결정적)
+    top_p: float = 0.9,
+    top_k: int = 50,  # 0에서 50으로 (다양성 제한)
+    repetition_penalty: float = 1.2,  # 1.05에서 1.2로 증가
+    show_all: bool = True,
+    seed: int = 0,
+    debug_mode: bool = True,
+) -> None:
+    """
+    Run quiz experiment with chat template and system prompt.
+    
+    Args:
+        target: Quiz target (season, episode, etc.)
+        model_name: HuggingFace model name
+        samples: Number of samples to generate
+        batch_size: Batch size for generation
+        max_new_tokens: Maximum tokens to generate
+        temperature: Sampling temperature
+        top_p: Nucleus sampling parameter
+        top_k: Top-k sampling parameter
+        repetition_penalty: Repetition penalty
+        show_all: Show all individual outputs
+        seed: Random seed (0 = no seed)
+        debug_mode: Show debug information
+    """
+    # Load environment
+    load_dotenv()
     
     # Build quiz
     paragraph, options, correct = QuizBuilder.build(target)
     
-    # Initialize config
+    # Initialize model and config
+    gen = FalconGenerator(model_name=model_name)
     cfg = GenerateConfig(
         max_new_tokens=max_new_tokens,
         temperature=temperature,
@@ -303,8 +322,27 @@ def run_single_experiment(
         messages, tokenize=False, add_generation_prompt=True
     )
     
+    # Debug output
+    if debug_mode:
+        print("\n" + "=" * 50)
+        print("PROMPT SENT TO MODEL (with chat template)")
+        print("=" * 50)
+        print(prompt_text)
+        print("=" * 50 + "\n")
+        
+        print("=" * 50)
+        print("GENERATION CONFIG")
+        print("=" * 50)
+        print(f"Temperature: {temperature}")
+        print(f"Top-p: {top_p}")
+        print(f"Top-k: {top_k}")
+        print(f"Max new tokens: {max_new_tokens}")
+        print(f"Repetition penalty: {repetition_penalty}")
+        print(f"Seed: {seed if seed != 0 else 'Not set'}")
+        print("=" * 50 + "\n")
+    
     # Set seed if specified
-    if seed is not None and seed != 0:
+    if seed != 0:
         import torch
         torch.manual_seed(seed)
     
@@ -312,18 +350,58 @@ def run_single_experiment(
     prompts = [prompt_text] * samples
     raw_outputs = []
     
-    print(f"  Generating {samples} samples...")
+    print("Generating responses...")
     for i, chunk in enumerate(chunked(prompts, batch_size)):
+        if debug_mode:
+            print(f"  Batch {i+1}/{(samples + batch_size - 1) // batch_size}...", end=" ")
         batch_outputs = gen.generate_batch(chunk, cfg)
         raw_outputs.extend(batch_outputs)
+        if debug_mode:
+            print(f"Done (first: '{batch_outputs[0][:30]}...')")
+    print()
     
     # Analyze responses
     predictions = [ResponseAnalyzer.extract_letter(output) for output in raw_outputs]
     analysis = ResponseAnalyzer.analyze_predictions(predictions, correct)
     
     # Display results
-    print(f"  Distribution: {' '.join([f'{k}:{v}' for k, v in sorted(analysis['distribution'].items())])}")
-    print(f"  Majority: {analysis['majority']} | Correct: {correct} | {'✓' if analysis['is_correct'] else '✗'}")
+    print("\n" + "=" * 50)
+    print("QUIZ")
+    print("=" * 50)
+    print(paragraph)
+    print("\nOptions:")
+    for key, value in options.items():
+        print(f"  {key}. {value}")
+    
+    print("\n" + "=" * 50)
+    print("RESULTS")
+    print("=" * 50)
+    print(f"Samples: {samples} | Batch Size: {batch_size}")
+    print(f"Distribution: {' '.join([f'{k}:{v}' for k, v in sorted(analysis['distribution'].items())])}")
+    print(f"Majority Vote: {analysis['majority']}")
+    print(f"Correct Answer: {correct}")
+    print(f"Status: {'✓ CORRECT' if analysis['is_correct'] else '✗ INCORRECT'}")
+    
+    if show_all:
+        print("\n" + "-" * 50)
+        print("Individual Outputs")
+        print("-" * 50)
+        for i, (raw, pred) in enumerate(zip(raw_outputs, predictions)):
+            status = "✓" if pred == correct else "✗"
+            print(f"[{i:02d}] {status} {pred} | '{raw.strip()}'")
+    
+    # Debug: Check for bias
+    if debug_mode:
+        print("\n" + "=" * 50)
+        print("BIAS ANALYSIS")
+        print("=" * 50)
+        total = len(predictions)
+        for choice in ["A", "B", "C", "D", "?"]:
+            count = predictions.count(choice)
+            pct = (count / total * 100) if total > 0 else 0
+            bar = "█" * int(pct / 2)
+            print(f"{choice}: {count:3d}/{total} ({pct:5.1f}%) {bar}")
+        print("=" * 50 + "\n")
     
     # Save results
     params = {
@@ -337,6 +415,9 @@ def run_single_experiment(
     }
     
     filename = FileManager.build_filename(target, samples, DEFAULT_PARAMS, params)
+    
+    # Get RESULTS_DIR from .env
+    results_dir = os.getenv("RESULTS_DIR").rstrip("/")
     save_path = os.path.join(results_dir, filename)
     
     metadata = {
@@ -352,84 +433,13 @@ def run_single_experiment(
     }
     
     FileManager.save_results(save_path, metadata, prompt_text, raw_outputs, predictions)
-    FileManager.append_final_result(target, analysis['majority'], correct, results_dir)
+    print(f"\n[✓] Results saved to: {save_path}")
     
-    return analysis
-
-
-def run(
-    model_name: str = "tiiuae/falcon-7b-instruct",
-    samples: int = 32,
-    batch_size: int = 16,
-    max_new_tokens: int = 5,
-    temperature: float = 0.7,
-    top_p: float = 0.9,
-    top_k: int = 50,
-    repetition_penalty: float = 1.2,
-    show_all: bool = False,
-    seed: int = 0,
-    debug_mode: bool = False,
-    num_repeats: int = 15,
-    sub_folder: str = "test7"
-) -> None:
-
-    # Load environment
-    load_dotenv()
-    base_results_dir = os.getenv("RESULTS_DIR").rstrip("/")
-    results_dir = os.path.join(base_results_dir, sub_folder)
-    
-    # Initialize model once
-    print("=" * 70)
-    print("INITIALIZING MODEL")
-    print("=" * 70)
-    print(f"Model: {model_name}")
-    print(f"Samples per experiment: {samples}")
-    print(f"Repeats per target: {num_repeats}")
-    print("=" * 70 + "\n")
-    
-    gen = FalconGenerator(model_name=model_name)
-    
-    # Define all targets
-    targets = ["season"]
-    
-    # Run experiments
-    total_experiments = len(targets) * num_repeats
-    current_exp = 0
-    
-    for target in targets:
-        print("\n" + "=" * 70)
-        print(f"TARGET: {target.upper()}")
-        print("=" * 70)
-        
-        for repeat in range(num_repeats):
-            current_exp += 1
-            print(f"\n[{current_exp}/{total_experiments}] Run {repeat + 1}/{num_repeats} for '{target}'")
-            
-            run_single_experiment(
-                target=target,
-                model_name=model_name,
-                samples=samples,
-                batch_size=batch_size,
-                max_new_tokens=max_new_tokens,
-                temperature=temperature,
-                top_p=top_p,
-                top_k=top_k,
-                repetition_penalty=repetition_penalty,
-                show_all=show_all,
-                seed=seed,
-                debug_mode=debug_mode,
-                gen=gen,
-                results_dir=results_dir,
-            )
-    
-    print("\n" + "=" * 70)
-    print("ALL EXPERIMENTS COMPLETED")
-    print("=" * 70)
-    print(f"Total experiments: {total_experiments}")
-    print(f"Results saved to: {results_dir}")
-    print(f"Summary file: {os.path.join(results_dir, 'final_results7.jsonl')}")
-    print("=" * 70 + "\n")
+    FileManager.append_final_result(analysis['majority'], correct, results_dir)
+    print(f"[✓] Final result appended to: {os.path.join(results_dir)}\n")
 
 
 if __name__ == "__main__":
-    fire.Fire(run)
+    
+    for i in range(10):
+        fire.Fire(run)

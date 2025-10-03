@@ -1,0 +1,359 @@
+[
+    {
+        "id": 247,
+        "original_passage": "Resources\nThe Australian Sports Commission has developed or supported national sporting organisations and state departments of sport and recreation to develop programs and resources to assist sporting organisations and schools to create safe, fun and inclusive sport environments. This section of the website provides some key resources available.\nFurther resources and information can be obtained from the state/territory departments of sport and recreation or relevant state or national sporting organisations.\nSports Medicine Australia has some useful resources available on their website including fact sheets on a range of topics about women and sport issues, including:\n- premenstrual syndrome and the active women\n- nutrition for sportswomen\n- exercise in pregnancy\n- exercise and well being after pregnancy\n- women, menopause and sport\n- exercise and osteoporosis\n- contraception for sportswomen\n- growing up with exercise\nThe factsheets are available on the Sport Medicine Australia website.",
+        "processed_passage": "The Australian Sports Commission has developed or supported national sporting organisations and state departments of sport and recreation to develop programs and resources to assist sporting organisations and schools to create safe, fun and inclusive sport environments. _______ has some useful resources available on their website including fact sheets on a range of topics about women and sport issues, including premenstrual syndrome and the active women, nutrition for sportswomen, exercise in pregnancy, and women, menopause and sport.",
+        "answer": "Sports Medicine Australia",
+        "options": ["Sports Medicine Federation", "Australian Health Authority", "Women's Sport Federation"]
+    },
+    {
+        "id": 253,
+        "original_passage": "In another blow to the company's long-standing reputation for quality, Toyota said that they would announce another recall today, spanning some 2.3 million cars for problems with sticking accelerator pedals.\nThe January 2010 recall includes the 2009-2010 RAV4, the 2009-2010 Corolla, the 2009-2010 Matrix, the 2005-2010 Avalon, the 2007-2010 Camry, the 2010 Highlander, the 2007-2010 Tundra and the 2008-2010 Sequioia. Toyota noted that the recall does not include the Prius or any of the Lexus or Scion brands, which use a pedal system from a different manufacturer.\nThe company was quick to note that this is actually a separate recall from the late 2009 recall involving 4.3 million vehicles for incorrect floor mats. This issue is related to the pedal system itself, which can become worn down and can become \"sticky over time,\" according to company spokesman Brian Lyons.",
+        "processed_passage": "In another blow to the company's long-standing reputation for quality, Toyota said that they would announce another recall today, spanning some _______ cars for problems with sticking accelerator pedals. The January 2010 recall includes the 2009-2010 RAV4, the 2009-2010 Corolla, the 2009-2010 Matrix, the 2005-2010 Avalon, the 2007-2010 Camry, the 2010 Highlander, the 2007-2010 Tundra and the 2008-2010 Sequioia.",
+        "answer": "2.3 million",
+        "options": ["2.5 million", "3.2 million", "4.3 million"]
+    },
+    {
+        "id": 283,
+        "original_passage": "Cool Springs Golf Reopens\nThe popular center closed suddenly in mid-March.\nA drive by the Cool Springs Golf and Family Recreation Center on Hamilton Road in Bethel Park on Tuesday afternoon showed the center's miniature golf and upper driving range areas to be open for business. The lower range and batting cages were closed. The center closed suddenly in mid-March when Cool Springs senior management met with some employees to tell them they would close until—tentatively—mid-April. Bob Salera, the head professional and director of instruction at Cool Springs Golf School, said that that was the first time that Cool Springs had closed since he started working at the facility in 1997.",
+        "processed_passage": "The Cool Springs Golf and Family Recreation Center on Hamilton Road in Bethel Park closed suddenly in mid-March. _______, the head professional and director of instruction at Cool Springs Golf School, said that that was the first time that Cool Springs had closed since he started working at the facility in 1997.",
+        "answer": "Bob Salera",
+        "options": ["Bob Sierra", "Bob Sanders", "Bob Sullivan"]
+    },
+    {
+        "id": 353,
+        "original_passage": "Smart Woman: Heart Healthy Meditation\nBy: Maxine Ridling\nUpdated: November 14, 2012\nStudy participants who meditated for 20 minutes, twice a day, over a five-year period were 48 percent less likely to have a heart attack, stroke or die as compared to African American heart patients who did not meditate.\nThe non-meditating group attended a health education class. They were told to engage in heart-healthy behaviors at home for at least 20 minutes a day, such as exercising, preparing healthy meals or relaxing.\nIn the end, those who meditated also lowered their blood pressure, along with their levels of stress and anger.\nResearchers say transcendental meditation appears to be a \"technique that turns on the body's own pharmacy to repair and maintain itself.\"",
+        "processed_passage": "Study participants who meditated for 20 minutes, twice a day, over a five-year period were _______ less likely to have a heart attack, stroke or die as compared to African American heart patients who did not meditate. In the end, those who meditated also lowered their blood pressure, along with their levels of stress and anger.",
+        "answer": "48 percent",
+        "options": ["47 percent", "38 percent", "58 percent"]
+    },
+    {
+        "id": 464,
+        "original_passage": "Shermans Travel » Blog » Miami Beach Gay Pride Cruise Returns\nShermanstravel Blog\nMiami Beach Gay Pride Cruise Returns\nMiami's LGBT scene will be sizzling come spring. First up on the docket, the Miami Beach Pride, held on April 15 this year, will be bringing buzz back to the Deco District. Last year's event saw 40,000 people march down Ocean Drive, making it the largest single-day event in South Beach's history, and with the addition of the post-Pride party cruise, one of the most unique.\nSetting sail Monday, April 16, through Friday, April 20, onboard Norwegian Cruise Line's Norwegian Sky, the Miami Beach Pride Cruise offers a chance to extend the party with a 4-night voyage to the Bahamas with stops in Grand Bahamas, Nassau, and Great Stirrup Cay, the cruise line's private island.",
+        "processed_passage": "Miami Beach Pride, held on April 15 this year, will be bringing buzz back to the Deco District. Last year's event saw _______ people march down Ocean Drive, making it the largest single-day event in South Beach's history. Setting sail Monday, April 16, through Friday, April 20, onboard Norwegian Cruise Line's Norwegian Sky, the Miami Beach Pride Cruise offers a chance to extend the party with a 4-night voyage to the Bahamas.",
+        "answer": "40,000",
+        "options": ["45,000", "30,000", "50,000"]
+    },
+    {
+        "id": 615,
+        "original_passage": "By: Devvy Kidd\nMay 5, 2012\nNewsWithViews.com\nI have been writing about vote fraud since 1993. Few Americans became interested in the cold reality that since the mid-1960s our elections have been rigged until the 2000 presidential election and the farce known as 'hanging chads'. As regular readers of my columns know I belong to no party; I left the Republican Party in 1996 over vote fraud and the putrid world of dirty politics where the truth didn't matter. It still doesn't to party hacks whose only goal is to climb the political ladder of power.\nThe Florida, examined 126,00 ballots, 127 poll books and 141 voter signature books from 18 counties: \"Thousands of ballots in heavily Democratic precincts were pre-punched for third-party candidates. Voting machines were rigged, tabulators were rigged, ballot boxes were stuffed, ballots were altered, ballots were sorted according to candidate, and ballots were destroyed.\"",
+        "processed_passage": "I have been writing about vote fraud since 1993. Few Americans became interested in the cold reality that since the mid-1960s our elections have been rigged until the 2000 presidential election and the farce known as 'hanging chads'. As regular readers of my columns know I belong to no party; I left the Republican Party in _______ over vote fraud and the putrid world of dirty politics where the truth didn't matter.",
+        "answer": "1996",
+        "options": ["1995", "1994", "1998"]
+    },
+    {
+        "id": 643,
+        "original_passage": "Shopping\nThe Brainerd Lakes Area has fabulous retail stores – both big and small – to fill your every shopping desire. You can find large retail stores, malls and shopping centers in Brainerd and Baxter. In historic downtown Brainerd as well as in surrounding communities of Crosslake, Nisswa, and Pequot Lakes, you will discover many specialty stores offering one-of-kind finds. Many of the Brainerd Lakes Area stores offer merchandise with an \"up north\" flair. Discover retail stores selling everything from apparel and jewelry to recreational gear and specialty items And don't forget the antiques! Hunt for those special treasures at dozens of antique shops in this central Minnesota region and be sure to check out the shops in Crosby, known as the \"Antique Capital of the Lakes Area.\"",
+        "processed_passage": "The Brainerd Lakes Area has fabulous retail stores – both big and small – to fill your every shopping desire. In historic downtown Brainerd as well as in surrounding communities of Crosslake, Nisswa, and Pequot Lakes, you will discover many specialty stores offering one-of-kind finds. Hunt for those special treasures at dozens of antique shops in this central Minnesota region and be sure to check out the shops in _______, known as the \"Antique Capital of the Lakes Area.\"",
+        "answer": "Crosby",
+        "options": ["Crosfield", "Crosslake", "Nisswa"]
+    },
+    {
+        "id": 704,
+        "original_passage": "LWVC Off-Board Leaders\nAlameda...\nBerkeley, Albany, Emeryville\nLos Altos/Mountain View Area\nCharolette is a past president of the LWV North San Diego County and also of the LWV Southwest Riverside County. In 2008 she was honored as Woman of the Year by the Riverside County Board of Supervisors. Her civic activities include appointments to...\nLos Angeles\nLos Angeles\nPalo Alto\nSanta Barbara\nSanta Monica\nAlameda\nLos Angeles\nGlendale/Burbank\nWhittier\nPasadena Area\nBeach Cities\nWendy works for a state regulatory agency, the California Regional Water Uuality Control Board for the Los Angeles Region. As a geologist at this agency, sheis had the fleWibility to work in many different areas—cleaning up contaminated groundwater...",
+        "processed_passage": "Charolette is a past president of the LWV North San Diego County and also of the LWV Southwest Riverside County. In _______ she was honored as Woman of the Year by the Riverside County Board of Supervisors. Wendy works for a state regulatory agency, the California Regional Water Quality Control Board for the Los Angeles Region.",
+        "answer": "2008",
+        "options": ["2009", "2006", "2010"]
+    },
+    {
+        "id": 1001,
+        "original_passage": "Special Report on\nStock Market Ticker Tape\nStock Market Ticker Tape - Trends\nLatest Trending Story:\nStocks - Ticker Tape Digest\nHis articles were used in the books - \"High Performance Investing,\" - \"Focus On Equities\" - and \"The Encyclopedia of Stock Investing.\" These books can be purchased by contacting Ticker Tape Digest via email or phone. He is also president of under the Exchange Report which goes out monthly to some 20,000 readers. The articles cover a variety of investment strategies. He also gives private investment workshops. Mr. Fasciocco has appeared on TV and radio shows around the country.",
+        "processed_passage": "His articles were used in the books - \"High Performance Investing,\" - \"Focus On Equities\" - and \"The Encyclopedia of Stock Investing.\" He is also president of under the Exchange Report which goes out monthly to some _______ readers. The articles cover a variety of investment strategies. He also gives private investment workshops.",
+        "answer": "20,000",
+        "options": ["22,000", "15,000", "25,000"]
+    },
+    {
+        "id": 1011,
+        "original_passage": "It wasn't pretty, but the Boise State Broncos defeated the BYU Cougars on Thursday night, 7-6, and with the victory the Broncos remain No. 24 in this week's Associated Press Top 25 Poll.\nThe Alabama Crimson Tide continue their stronghold on the No. 1 position in the poll, with the Oregon Ducks jumping the LSU Tigers to grab the No. 2 spot this week. LSU's less-than-impressive win over Auburn is the cause of the slide, though the Tigers still did garner one first place vote. Florida State and Georgia round out the Top 5 this week.\nThree new undefeated teams jumped into the AP Poll this week: Oregon State at No. 18, Rutgers at No. 23, and Baylor at No. 25.",
+        "processed_passage": "The Boise State Broncos defeated the BYU Cougars on Thursday night, 7-6, and with the victory the Broncos remain No. 24 in this week's Associated Press Top 25 Poll. Three new undefeated teams jumped into the AP Poll this week: Oregon State at No. 18, Rutgers at _______, and Baylor at No. 25.",
+        "answer": "No. 23",
+        "options": ["No. 24", "No. 22", "No. 21"]
+    },
+    {
+        "id": 1082,
+        "original_passage": "Definition.\nCauses:\n- High blood pressure\n- Blood in the urine\n- Urinary tract infection\n- Kidney stones\n- Additional, less common symptoms may include:\n- Nail abnormalities\n- Painful menstrual periods\n- Joint pain\n- Drowsiness\nIf you experience any of these symptoms, do not assume it is due to PKD. These symptoms may be caused by other, less serious health conditions. If you experience any of them, see your physician.\nDiagnosis.\nRecent research has led to the creation of several drugs that may prevent cysts from developing. An example is somatostatin, which has been studied in humans and may one day be available to prevent polycystic kidneys from developing.",
+        "processed_passage": "Recent research has led to the creation of several drugs that may prevent cysts from developing. An example is _______, which has been studied in humans and may one day be available to prevent polycystic kidneys from developing. PKD is an inherited disease and is not preventable.",
+        "answer": "somatostatin",
+        "options": ["somatotropin", "somatotropin", "somatomammotropin"]
+    },
+    {
+        "id": 1130,
+        "original_passage": "But Germany's federal tourist association BTW forecasts growth of just 1 to 2 per cent this year due to the uncertain economic environment.\n\"I think designers are opening up their capital earlier now because they understand that it allows them to grow faster,\" Lanciaux said, adding that Doma was for her a \"modern Armani\".\nInflation in the euro zone has fallen to a three-year low and unemployment has hit a new record, cementing expectations of an interest rate cut by the European Central Bank later this week.\nDeutsche Bank said there was no end in sight to its legal dispute with the representatives of deceased media mogul Leo Kirch.",
+        "processed_passage": "Germany's federal tourist association BTW forecasts growth of just 1 to 2 per cent this year due to the uncertain economic environment. Deutsche Bank said there was no end in sight to its legal dispute with the representatives of deceased media mogul _______.",
+        "answer": "Leo Kirch",
+        "options": ["Leo Kirchner", "Leo Klein", "Leo Keller"]
+    },
+    {
+        "id": 1550,
+        "original_passage": "Our play. It was amazing because each drawing I made changed into a three-dimensional object. Hot glass is beautiful and has an amazing red glow…and the way the colors are added is wonderful. The object is created very quickly and cools for days. I was thinking of making containers and vases for flowers or some brew. I wish I thought about the practical aspects more…like how do you hold a flying cup? Or do you spill or even get hurt when your pitcher has pointy ears?\nNow I know I will not compete with professional glassmakers! And I appreciate how much work it takes to make something complex and beautiful. And I had fun. Also, the Corning Museum—and the history of glass—is amazing. You should visit! Happy summer.\"\nPeter Sís is the award-winning author and illustrator of many books for children, among them Fire Truck, Ballerina, and The Train of States. He also illustrated The Dream Stealer, by Sid Fleischman.",
+        "processed_passage": "Hot glass is beautiful and has an amazing red glow…and the way the colors are added is wonderful. The object is created very quickly and cools for days. Peter Sís is the award-winning author and illustrator of many books for children, among them Fire Truck, Ballerina, and The Train of States. He also illustrated _______, by Sid Fleischman.",
+        "answer": "The Dream Stealer",
+        "options": ["The Dream Seeker", "The Dream Keeper", "The Dream Catcher"]
+    },
+    {
+        "id": 1606,
+        "original_passage": "Voinovich, George\nThe latest news on Voinovich, George\nEleven Senate Republicans joined Democrats in a 67-28 proxy vote to wind up the debate.\nStop insulting the military by suggesting they're not capable of overcoming base prejudice.\nHere's your gift, and here's the bill.\nColin Powell said failing to ratify the treaty could leave the U.S. in a vulnerable position.\nDemocrats won key races in West Virginia and California to retain their majority in the Senate.",
+        "processed_passage": "Eleven Senate Republicans joined Democrats in a _______ proxy vote to wind up the debate. Colin Powell said failing to ratify the treaty could leave the U.S. in a vulnerable position. Democrats won key races in West Virginia and California to retain their majority in the Senate.",
+        "answer": "67-28",
+        "options": ["67-29", "68-27", "66-29"]
+    },
+    {
+        "id": 1786,
+        "original_passage": "Written by Amanda Turner for International Gymnast Magazine\n|\nThursday, 28 June 2012 15:19\nGymnastics Canada Gymnastique announced its 2012 women's Olympic squad Thursday following the conclusion of the selection trials in Quebec.\nNational champion Kristina Vaculik leads the squad along with Victoria Moors, Brittany Rogers, Dominique Pegg and Ellie Black. Jessica Savona and Madeline Gardiner are alternates.\nPeng-Peng Lee, who suffered a torn ACL in May, will serve as team captain for Canada in London.\nThe Canadian women qualified a full team to the Olympic Games for the first time since 2004. National champion Nathan Gafuik earned the Canadian men's only berth.",
+        "processed_passage": "Gymnastics Canada Gymnastique announced its 2012 women's Olympic squad Thursday following the conclusion of the selection trials in Quebec. National champion _______ leads the squad along with Victoria Moors, Brittany Rogers, Dominique Pegg and Ellie Black. Peng-Peng Lee, who suffered a torn ACL in May, will serve as team captain for Canada in London.",
+        "answer": "Kristina Vaculik",
+        "options": ["Kristina Vakulik", "Kristen Vaculik", "Christina Vaculik"]
+    },
+    {
+        "id": 1876,
+        "original_passage": "Welcome to the UKs No.1 online carp fishing tackle shop specialising in all types of carp fishing tackle, equipment and accessories.\nWe offer a massive range of carp tackle, carp baits, carp rods, carp reels, clothing, luggage, bait boats, bivvies, tackle boxes, scales, chairs, bite alarms, nets, head torches, sleeping bags, terminal tackle, boilies and much more at the best prices.\nWe stock all the quality carp fishing tackle and bait manufacturers such as Matrix, Daiwa, Fox, JRC, Trakker, Shimano, Korda, Gardner, Dynamite Baits, Aqua Products, Sufix, Enterprise Tackle, Korum, Heathrow Bait Services, Mainline, Nash, Carp Porter, Reuben Heaton, and many more.",
+        "processed_passage": "Welcome to the UKs No.1 online carp fishing tackle shop specialising in all types of carp fishing tackle, equipment and accessories. We stock all the quality carp fishing tackle and bait manufacturers such as Matrix, Daiwa, Fox, JRC, Trakker, Shimano, Korda, Gardner, _______, Aqua Products, Sufix, Enterprise Tackle, Korum, and many more.",
+        "answer": "Dynamite Baits",
+        "options": ["Dynamic Baits", "Dynamic Baits", "Dynamix Baits"]
+    },
+    {
+        "id": 1905,
+        "original_passage": "In 2009 I bought a G1, back when it was the only Android phone available. Immediately I became frustrated because none of the available music players were capable of recognizing my music because I didn't have perfect track information embedded on my files. They all gave me one pool with hundreds of songs named track1, track2, track3… Or they would have multiple different entries for the same band. For example: AC/DC, AC_DC, AC DC and ACDC.\nTo solve this, I developed KalinPlayer, which I used every day for a year and a half as my music player. I never got all the kinks worked out to the point where I felt comfortable releasing it to the public, but it worked for me and that's what was important.",
+        "processed_passage": "In 2009 I bought a G1, back when it was the only Android phone available. Immediately I became frustrated because none of the available music players were capable of recognizing my music. To solve this, I developed _______, which I used every day for a year and a half as my music player.",
+        "answer": "KalinPlayer",
+        "options": ["KaliPlayer", "KalimPlayer", "KalenPlayer"]
+    },
+    {
+        "id": 1917,
+        "original_passage": "The Aberdeen Timberland Library will reopen on Monday, August 13 as planned. The library has been closed since July 30 for a facility improvement project.\n'All of the high traffic area improvements to the restrooms, carpets, and walls have been completed,' wrote Aberdeen Timberland Library Manager Christine Peck in an email. Additional work will be completed during regular hours including some carpet work, parking lot improvements, and installation of new HVAC controls said Peck. Library lounge furniture will be reupholstered later this fall.\nPatrons' hold items—books, DVDs, CDs, magazines and other items—listed as available for pickup at the Aberdeen Timberland Library have been at the Hoquiam Timberland Library during the closure.",
+        "processed_passage": "The Aberdeen Timberland Library will reopen on Monday, August 13 as planned. The library has been closed since _______ for a facility improvement project. Aberdeen Timberland Library Manager Christine Peck said additional work will be completed during regular hours including some carpet work, parking lot improvements, and installation of new HVAC controls.",
+        "answer": "July 30",
+        "options": ["July 29", "July 20", "July 31"]
+    },
+    {
+        "id": 2016,
+        "original_passage": "Back against the cold wall. His soul taps from the inside of his irises. His hand held out for a penny or two …\nBack against the coach. His stick taps from the inside of two hundred dollar gloves. His hand held out to congratulate a millionaire.\nRising on knees worn with malnutrition and sleepless nights under an unforgiving blanket of cold. Enough money to buy a coffee and warmth.\nRising on one thousand dollar skates donated by a greedy sales representative from a sporting good company. Enough money to buy a Tim Horton franchise.",
+        "processed_passage": "Back against the coach. His stick taps from the inside of two hundred dollar gloves. His hand held out to congratulate a millionaire. Rising on _______ skates donated by a greedy sales representative from a sporting good company. Enough money to buy a Tim Horton franchise.",
+        "answer": "one thousand dollar",
+        "options": ["nine hundred dollar", "two thousand dollar", "fifteen hundred dollar"]
+    },
+    {
+        "id": 2240,
+        "original_passage": "Police have charged a Hoke County man with killing two men found dead in their car after it crashed on Gillespie Street on Sunday.\nEric Junior White, 22, of Beltons Loop in Raeford, was charged about 3 a.m. with two counts of first-degree murder, said Lt. Chris Davis, a Fayetteville police spokesman.\nWhite is accused of shooing Anthony DeAngelo Aigle, 23, of West Blue Street in St. Pauls, and Jamone Lasalle Jacques, 26, of the 6200 block of Yewlene Drive in Fayetteville, Davis said.\nOfficers were called to the 300 block of Gillespie Street, near Campbell Avenue and Blount Street, about shots fired and a traffic accident about 9 p.m., Davis said. When they arrived, they found Aigle and Jacques dead inside a Dodge Charger that had run off the road and into a vacant lot.",
+        "processed_passage": "Police have charged a Hoke County man with killing two men found dead in their car after it crashed on Gillespie Street on Sunday. Eric Junior White, 22, of Beltons Loop in Raeford, was charged about 3 a.m. with two counts of first-degree murder, said Lt. _______, a Fayetteville police spokesman. Officers were called to the 300 block of Gillespie Street about 9 p.m. and found the victims dead inside a Dodge Charger.",
+        "answer": "Chris Davis",
+        "options": ["Chris Daniels", "Chris Davidson", "Chris Davies"]
+    },
+    {
+        "id": 2316,
+        "original_passage": "This storm met the 2 criteria set by the National Weather Service that define a blizzard. The first condition is that the snow has reduced visibility to less than a 1/4 of a mile. The second criteria is sustained or frequent wind gusts of 35 miles an hour or greater. These conditions must last 3 hours or longer.\nPublications on this topic in the State Library's collection include the following:\n1. Annual report. Massachusetts Emergency Management Agency.\nMR 355M3 M37 1996-\n2. The blizzard of '88. Cable, Mary. QC 929 .S7 1988\n3. Comprehensive emergency response plan. Massachusetts. Civil Defense Agency and Office of Emergency Preparedness, 1988. MR 355M3 .C65\n4. Blizzard of 78 : after-action report to Governor Michael S. Dukakis . Massachusetts. Military Division. MR 355.6M3 B54 1978",
+        "processed_passage": "This storm met the 2 criteria set by the National Weather Service that define a blizzard. The first condition is that the snow has reduced visibility to less than a 1/4 of a mile. The second criteria is sustained or frequent wind gusts of _______ or greater. These conditions must last 3 hours or longer.",
+        "answer": "35 miles an hour",
+        "options": ["36 miles an hour", "30 miles an hour", "40 miles an hour"]
+    },
+    {
+        "id": 2317,
+        "original_passage": "The Association was formed in December 1994 as a professional association for\nmathematics teachers and other mathematics educators. The Association has more\nthan 350 individual members, mostly mathematics educators and some parents.\nSchools and interested organisations can join the Association as corporate members\nand we have more than 125 corporate members.\nThe objectives of the Association are:\nThe Association organises talks, conferences, workshops,\nseminars and activities for students with the intentions of disseminating information on current events and issues in mathematics\neducation to members as well as providing forums for discussion among mathematics educators.\nThe Association also publishes The Mathematics\nEducator,\na refereed journal with articles on mathematics education. This journal is issued to members twice a year.",
+        "processed_passage": "The Association was formed in _______ as a professional association for mathematics teachers and other mathematics educators. The Association has more than 350 individual members, mostly mathematics educators and some parents. Schools and interested organisations can join the Association as corporate members and we have more than 125 corporate members.",
+        "answer": "December 1994",
+        "options": ["November 1994", "December 1993", "November 1994"]
+    },
+    {
+        "id": 2420,
+        "original_passage": "Mr. Butler, a native of Gwinnett County, had lived in Bacon County, Jeff Davis County and Douglas, Coffee County area for many years.\nHe was the son of the late James Thomas Butler and the late Sarah Frances Thurman Butler and husband of the late Lola Malloy Butler Butler.\nHe was a retired rancher. Mr. Butler was of the Baptist faith.\nSurvivors include two daughter, Rachael Evelyn Byrd of Macon and Anna Ruth Dorn of North Augusta; four sons, Ronnie Wayne Butler Sr. of North Augusta, Roy Jack Butler of Dearing, Larry Butler of Hazlehurst, and Kennon Frederick Butler of Baxley; 18 grandchildren, 20 great-grandchildren and five great-great grandchildren; several nieces, nephews and other relatives.\nFuneral services were held Thursday morning, March 18, 2004, at 10 a.m., at the chapel of Ricketson Funeral Home with Rev. Matt Rutledge officiating.",
+        "processed_passage": "Mr. Butler was a retired rancher and was of the Baptist faith. Survivors include two daughters, Rachael Evelyn Byrd of Macon and Anna Ruth Dorn of North Augusta; four sons, Ronnie Wayne Butler Sr. of North Augusta, Roy Jack Butler of Dearing, Larry Butler of Hazlehurst, and Kennon Frederick Butler of Baxley; 18 grandchildren, _______ and five great-great grandchildren.",
+        "answer": "20 great-grandchildren",
+        "options": ["19 great-grandchildren", "22 great-grandchildren", "18 great-grandchildren"]
+    },
+    {
+        "id": 2460,
+        "original_passage": "The Mayo Clinic started the Center for Social Media in July 2010, unofficially becoming the global.\" The book not only encourages members of the health care community to join social media, but also presents arguments for social media's importance in the rapidly evolving world of modern medicine.\nMayo Clinic also uses Twitter, Facebook, YouTube and even Second Life to connect with patients. Strict regulations limit the detail in which Mayo Clinic can answer patient questions, but scheduled Twitter chats offer a way to provide general medical advice, as does Mayo Clinic's weekly radio program. Mayo Clinic's YouTube channel, with videos ranging from information on sports injuries to surgery prep suggestions, has more than 8.3 million views.",
+        "processed_passage": "The Mayo Clinic started the Center for Social Media in _______, unofficially becoming the global leader in healthcare social media. Mayo Clinic also uses Twitter, Facebook, YouTube and even Second Life to connect with patients. Mayo Clinic's YouTube channel has more than 8.3 million views.",
+        "answer": "July 2010",
+        "options": ["August 2010", "June 2010", "August 2010"]
+    },
+    {
+        "id": 2475,
+        "original_passage": "Over this past weekend, we got the chance to take a spot on the Rockstar/Metal Mulisha tour bus and tag along for three stops of the 2009 Rockstar Mayhem Festival—Phoenix, Albuquerque, and Denver. At each stop, the Mulisha riders put on three jump demos while heavy metal bands played on two outdoor stages. Then when the sun went down, the crowd funneled into an amphitheater to watch Slayer and Marilyn Mansion on the main stage. There's a lot that goes into putting a tour like this on than people might think and it was truly a crazy experience getting to be a part of it for three stops.",
+        "processed_passage": "Over this past weekend, we got the chance to take a spot on the Rockstar/Metal Mulisha tour bus and tag along for three stops of the 2009 Rockstar Mayhem Festival—Phoenix, _______, and Denver. At each stop, the Mulisha riders put on three jump demos while heavy metal bands played on two outdoor stages.",
+        "answer": "Albuquerque",
+        "options": ["Albuquerque", "Albuquerque", "El Paso"]
+    },
+    {
+        "id": 2638,
+        "original_passage": "Samsung will tell delegates at the Createc gathering in Tokyo all about its WiMax 2 trial system, based on IEEE 802.16m with a potential speed of 330Mbps.\nSamsung, in partnership with UQ Communications, claims that it will show full-HD 3D videos and 16 Full-HD videos on 4 TVs at the same time using its WiMax 2 trial systems and device. To do this, Samsung will use its commercial Mobile WiMax base station, which is currently deployed and operated by major Mobile WiMax operators around the world.\nWiMax 2 is based on the IEEE 802.16m standard, which is said to enable efficient, faster, and more converged data communications. It also allows current Mobile WiMax operators to migrate to WiMax 2 by upgrading channel cards or system software.\nWiMax 2 standards are expected to be finalised by November 2010. Samsung plans to introduce the first commercial WiMax 2 by the end of 2011.",
+        "processed_passage": "Samsung will tell delegates at the Createc gathering in Tokyo all about its WiMax 2 trial system, based on IEEE 802.16m with a potential speed of 330Mbps. Samsung, in partnership with _______, claims that it will show full-HD 3D videos and 16 Full-HD videos on 4 TVs at the same time using its WiMax 2 trial systems and device.",
+        "answer": "UQ Communications",
+        "options": ["UQ Telecommunications", "UQ Technologies", "UC Communications"]
+    },
+    {
+        "id": 2639,
+        "original_passage": "UK mobile operators unite to prevent 4G interfering with TV\nDigital Mobile Spectrum Limited will help to mitigate interference in neighbouring spectruum bands\nBy Sophie Curtis | Techworld | Published: 11:55, 19 October 2012\nThe UK's major mobile operators have formed an alliance to limit the impact of 4G services on digital television reception.\nEE, O2, Vodafone and Three have created a company called Digital Mobile Spectrum Limited, which will be responsible for ensuring that consumers continue to receive clear Freeview TV signals following the roll out of 4G mobile services in the 800MHz spectrum band from the Spring of next year.",
+        "processed_passage": "The UK's major mobile operators have formed an alliance to limit the impact of 4G services on digital television reception. EE, O2, Vodafone and Three have created a company called _______, which will be responsible for ensuring that consumers continue to receive clear Freeview TV signals following the roll out of 4G mobile services.",
+        "answer": "Digital Mobile Spectrum Limited",
+        "options": ["Digital Mobile Services Limited", "Digital Spectrum Mobile Limited", "Digital Mobile Network Limited"]
+    },
+    {
+        "id": 2742,
+        "original_passage": "The first presidential debate held last night focused on the economy, taxes and healthcare. Mitt Romney criticized President Barack Obama by saying the economy has been recovering slowly and has a high unemployment rate, calling into question his record and policies.\nObama said with the economy that he inherited four years ago, his policies are bringing America back from its crisis. While a lot of things were brought up during the debate, including social security, there are some aspects that weren't mentioned. Obama didn't discuss Romney's work at Bain Capital. He also didn't bring up the governor's hesitation in releasing more than two years of his tax returns.\nRomney discussed his plans of repealing the president's healthcare plan and talked about his years as governor in Massachusetts when his healthcare plan was implemented.",
+        "processed_passage": "The first presidential debate held last night focused on the economy, taxes and healthcare. Mitt Romney criticized President Barack Obama by saying the economy has been recovering slowly. While a lot of things were brought up during the debate, there are some aspects that weren't mentioned. Obama didn't discuss Romney's work at _______. He also didn't bring up the governor's hesitation in releasing more than two years of his tax returns.",
+        "answer": "Bain Capital",
+        "options": ["Bain & Associates", "Bain & Company", "Main Capital"]
+    },
+    {
+        "id": 2936,
+        "original_passage": "Frazer will host ceramics exhibition through May 12 Patrick Frazer, a senior art major at The University of South Dakota, will host his bachelor of fine arts exhibition through May 12 at Sletwold Hall in the W.H. Over State Museum at 1110 Ratingen St. in Vermillion.\nA public reception will be held on Friday, May 11 at 6 p.m.\nFrazer, a New Hampshire native, has been on the Fine Art's dean's list for three consecutive years. He also earned a University Scholarship from USD. Frazer has displayed work in the Wilbur Stilwell juried exhibition, and at The Coffee Shop Gallery in Vermillion. Other exhibitions include the Vermillion Area Arts Council \"Glad Tidings Craft Sale\" and the annual USD Student Fine Art Sale.\nFrazer has studied many areas of pottery during his years at USD. His areas of expertise include raku, high fire stoneware, woodfire and salt glazed pots.",
+        "processed_passage": "Patrick Frazer, a senior art major at The University of South Dakota, will host his bachelor of fine arts exhibition through May 12 at Sletwold Hall in the W.H. Over State Museum at _______ in Vermillion. A public reception will be held on Friday, May 11 at 6 p.m. Frazer's areas of expertise include raku, high fire stoneware, woodfire and salt glazed pots.",
+        "answer": "1110 Ratingen St.",
+        "options": ["1111 Ratingen St.", "1120 Ratingen St.", "1100 Ratingen St."]
+    },
+    {
+        "id": 2991,
+        "original_passage": "prius compressor after body shop serviced a/c\nAlbum created by lech auto air conditionin, Sep 9, 2011.\nImage 25 of 44\n- Reedja42\nWe have been trained over the years to always look for the \"great deals\". Sometimes though, you get what you pay for. I don't think I would trust just anyone working on a car as sophisticated as a Prius.\n- trseven\nI'm now thinking this is also my problem. Bought a 2004 from an insurance auction. Took a deer to the hood. Bought an aftermarket condenser. Did all the repair work before swapping in the new condenser. Now when its on Max both low and high side pressures are up to high. Found that if I tend the temp and keep the fan speed medium or just one above it does cool good and the pressures are in range. Takes longer to cool the car but its been effective even on 104 degree day.",
+        "processed_passage": "Album created by lech auto air conditionin, Sep 9, 2011. I'm now thinking this is also my problem. Bought a _______ from an insurance auction. Took a deer to the hood. Bought an aftermarket condenser. Takes longer to cool the car but its been effective even on 104 degree day.",
+        "answer": "2004",
+        "options": ["2003", "2005", "2003"]
+    },
+    {
+        "id": 3009,
+        "original_passage": "UK family got on property ladder by buying Garage\nThe UK is witness of a unique new property investment, made by the Borman family from St Neots, Cambridgeshire. They found an extraordinary way of getting on the property ladder. Instead of buying a bigger home, they invested in a garage which they turned into a new living room.\nThe Borman family has been living in the St Neots, Cambridgeshire whole their lives. The 44 year old Martin, his wife Lindy and daughter Amber were having a hard time living in a house that is just too small for them. They had thought about investing in another property over and over again but due to their current financial situation they were not able to buy themselves a new home. Even though they could afford to buy a new home, they knew something had to change. Therefore they used the money they had saved up to buy themselves a £6,500 lock-up garage and turned it into an extra room.",
+        "processed_passage": "The UK is witness of a unique new property investment, made by the Borman family from St Neots, Cambridgeshire. The 44 year old Martin, his wife Lindy and daughter Amber were having a hard time living in a house that is just too small for them. Therefore they used the money they had saved up to buy themselves a _______ lock-up garage and turned it into an extra room.",
+        "answer": "£6,500",
+        "options": ["£6,000", "£5,500", "£7,500"]
+    },
+    {
+        "id": 3028,
+        "original_passage": ".NET Component to Monitor, Send and Suppress Keyboard and Mouse Input.\nA cartoon-style mini golf game for all lovers of golf.\n3D graphics make you feel like you're playing through a whole new kind of course.\nOffice Mini Golf is a free Flash mini-golf game played inside an office.\nMouse driver.\nExplorer Context Menu Component for .NET.\nDameWare Mini Remote Control is a tool that provides powerful remote control.\nSnapStream Firefly Mini is a PC remote control device.\nThe world's craziest 3D mini golf game, compete against up to 9 people.\nMini-stream Ripper is the easiest, most powerful streaming audio recorder.",
+        "processed_passage": "A cartoon-style mini golf game for all lovers of golf. 3D graphics make you feel like you're playing through a whole new kind of course. _______ is a tool that provides powerful remote control. The world's craziest 3D mini golf game, compete against up to 9 people.",
+        "answer": "DameWare Mini Remote Control",
+        "options": ["DameWare Remote Mini Control", "DameWare Remote Control Mini", "DameWare Mini Control Remote"]
+    },
+    {
+        "id": 3086,
+        "original_passage": "Username\nRahima Foundation encourages the community to generously donate used cars in working condition that are no longer needed. There are many families in our local areas that desperately need a car, but cannot afford to buy one. A car can make a huge difference in their lives, such as helping them to get a much needed job, or allowing them to provide transportation for their children to and from school. Having their own transportation will be very helpful for these families to stand on their own.\nUnlike some other organizations, we actually give the car to a deserving family, rather than sell it for what it's worth. This is the reason we require that the car be in good working condition and should have passed the smog test. We will take care of all the DMV paperwork, and you will get the satisfaction of helping someone in need, and the benefit of a tax deduction for the fair value of the car.",
+        "processed_passage": "_______ encourages the community to generously donate used cars in working condition that are no longer needed. Unlike some other organizations, we actually give the car to a deserving family, rather than sell it for what it's worth. We will take care of all the DMV paperwork, and you will get the satisfaction of helping someone in need.",
+        "answer": "Rahima Foundation",
+        "options": ["Rahima Fund", "Rahima Organization", "Rahim Foundation"]
+    },
+    {
+        "id": 3088,
+        "original_passage": "...this conversation was about a week ago, she's in corsica now and i've finally got something i wanted to share.\nthis one's for you, sate!\nthis is the pre-punycorn unicorn's dearest friend. they like to salsa dance together to the unicorn's radio, and when that's out of batteries, she plays Julieta Venegas music on her accordion.\n7 comments:\nThe second picture totally made me laugh. Sooooo cuuuuuuuuttte! :D\nOh, and happy 4th!\nJo - That couple dancing to the music from the radio is simply fabulous Joanna -- keep this going -- its rich!!",
+        "processed_passage": "This conversation was about a week ago, she's in corsica now and i've finally got something i wanted to share. This is the pre-punycorn unicorn's dearest friend. They like to salsa dance together to the unicorn's radio, and when that's out of batteries, she plays _______ music on her accordion.",
+        "answer": "Julieta Venegas",
+        "options": ["Julieta Vengas", "Julieta Vargas", "Julieta Vasquez"]
+    },
+    {
+        "id": 3235,
+        "original_passage": "SBW sets sights on Olympics earlier this month in Australia.\n\"I think I am best at putting on the boots and running out on the field to play rugby union or rugby league,\" said Williams.\n\"If I had lost that fight I would have given it away because it is just not worth it, but I overcame some hurdles and the reaction of all the people close to me was good so we will assess it when the time is right.\"\nWilliams, on the receiving end of some heavy blows from Botha in the final round of the bout, admitted that boxing was a challenge.\n\"I am not perfect but I am just trying to keep improving and if everyone is saying I have improved then I will just keep plugging away and maybe have another fight,\" he said.",
+        "processed_passage": "\"I think I am best at putting on the boots and running out on the field to play rugby union or rugby league,\" said Williams. Williams, on the receiving end of some heavy blows from _______ in the final round of the bout, admitted that boxing was a challenge. \"But at this stage I am concentrating on playing rugby league and we will assess that after the season.\"",
+        "answer": "Botha",
+        "options": ["Bothe", "Boothman", "Botham"]
+    },
+    {
+        "id": 3300,
+        "original_passage": "Ask Counselling\nAsk Counselling is for University of Melbourne students with personal questions about psychological and emotional issues. Ask Counselling provides an initial opportunity to gain help and information, as it can sometimes be a difficult step seeing a counsellor face-to-face. Our website provides you with an opportunity to learn about other students' concerns and possibly share your own.\nAsk Counselling is not a 24 hour service, nor for students in crisis. If you need an answer immediately, please contact LifeLine on 13 11 14 or the Suicide Helpline on 1300 651 251. Ask Counselling provides an opportunity to submit a question, but is not a diagnostic or therapeutic service and does not replace face-to-face counselling.",
+        "processed_passage": "Ask Counselling is for University of Melbourne students with personal questions about psychological and emotional issues. Ask Counselling is not a 24 hour service, nor for students in crisis. If you need an answer immediately, please contact LifeLine on _______ or the Suicide Helpline on 1300 651 251.",
+        "answer": "13 11 14",
+        "options": ["13 11 13", "13 12 14", "13 11 15"]
+    },
+    {
+        "id": 3444,
+        "original_passage": "Star Wars: Republic 3: Prelude to Rebellion, Part 3Talk0\nthis wiki\nPrelude to Rebellion, Part 3 is the third issue in the Star Wars: Republic series of comics. It was published on February 17, 1999 by Dark Horse Comics.\nPublisher's summaryEdit\nAs Ki-Adi-Mundi gets closer to the truth of who is seeking to destabilize his homeworld, and why, he comes closer and closer to his own doom, and only the dimly remembered teachings of his diminutive Jedi Master can save him!\nPlot summaryEdit\nShortly after the death of the Swoop-gang leader, Skeel, Ephant Mon decides it is time to move their hiding place. It turns out to be none-too-soon, as Ki-Adi-Mundi is hot on his trail.",
+        "processed_passage": "Prelude to Rebellion, Part 3 is the third issue in the Star Wars: Republic series of comics. It was published on _______ by Dark Horse Comics. Shortly after the death of the Swoop-gang leader, Skeel, Ephant Mon decides it is time to move their hiding place as Ki-Adi-Mundi is hot on his trail.",
+        "answer": "February 17, 1999",
+        "options": ["February 16, 1999", "February 18, 1999", "February 17, 1998"]
+    },
+    {
+        "id": 3465,
+        "original_passage": ".\"\nJoy.\"\nPitchers.\"\nExtra bases\n• Jim Hickey and his teammates from St. Anthony's Hospital -- Joe Ciaccio, Jeff Weitholter, Eric Garateix and Bill Ulbricht -- shot 55 to win first place in Monday's Rays Charity Golf Tournament, held at the Ritz-Carlton Members Golf Club in Sarasota. Jake McGee won bragging rights in the Rays' clubhouse by winning the longest drive contest.\n• The Rays put in some work on situational hitting at Tuesday's workout. Maddon noted that any time he wants to emphasize something, he'll put it in early in camp \"to get the thoughts rolling.\"\n• Maddon spoke highly of Jake Odorizzi's \"ability to throw the ball where he wants to,\" noting that the right-hander acquired from the Royals in the Shields trade had a simple delivery and a good makeup.",
+        "processed_passage": "Jim Hickey and his teammates from St. Anthony's Hospital -- Joe Ciaccio, Jeff Weitholter, Eric Garateix and Bill Ulbricht -- shot _______ to win first place in Monday's Rays Charity Golf Tournament, held at the Ritz-Carlton Members Golf Club in Sarasota. Jake McGee won bragging rights in the Rays' clubhouse by winning the longest drive contest.",
+        "answer": "55",
+        "options": ["57", "54", "56"]
+    },
+    {
+        "id": 3470,
+        "original_passage": "NEW ORLEANS – Services for nurse and former Earl K. Long Hospital COO Peggy Pippenger will be Wednesday. She died Jan. 5 in Sevierville, Tenn.\nShe was also former director of nurses at St. James Parish Hospital, director of quality care and assudrance at River Parishes Hospital and assistant administrator at Chabert Hospital.\nSurvivors include her husband Phillip, two sons and three step-children.\nArrangements are by Roselynn.\nAirport director\nNEW ORLEANS – Services for decorated veteran and aviation director Paul Stoulig, Sr. will be Saturday. He died Dec. 29 at age 89.\nHe was a US Army veteran of the European Theater of World War II and held the Bronze Star. A degreed accountant, he retired after a career as director of the New Orleans Aviation Board, during which he oversaw expansion of Moisant Field into New Orleans International Airport.",
+        "processed_passage": "Services for nurse and former Earl K. Long Hospital COO Peggy Pippenger will be Wednesday. She died Jan. 5 in _______, Tenn. She was also former director of nurses at St. James Parish Hospital, director of quality care and assurance at River Parishes Hospital and assistant administrator at Chabert Hospital. Survivors include her husband Phillip, two sons and three step-children.",
+        "answer": "Sevierville",
+        "options": ["Knoxville", "Gatlinburg", "Pigeon Forge"]
+    },
+    {
+        "id": 3498,
+        "original_passage": "Jason Jones's post on Sacramento Kings | Latest updates on Sulia\nRepost of Petrie post with correction on quote. It's Petrie talking, not Cousins\nWith DeMarcus Cousins suspended indefinitely for unprofessional behavior and conduct detrimental to the team, there has already been speculation about whether the Kings should trade the talented but problematic third-year center. Kings basketball president Geoff Petrie said the Kings still plan to work with Cousins, not deal him. . The latest incident happened Friday night when he exchanged words with coach Keith Smart and his response to Smart became so personal of an attack that Smart left him in the locker room at halftime",
+        "processed_passage": "With DeMarcus Cousins suspended indefinitely for unprofessional behavior and conduct detrimental to the team, there has already been speculation about whether the Kings should trade the talented but problematic third-year center. Kings basketball president _______ said the Kings still plan to work with Cousins, not deal him. The latest incident happened Friday night when he exchanged words with coach Keith Smart.",
+        "answer": "Geoff Petrie",
+        "options": ["Geoff Petri", "Geoff Perry", "Jeff Petrie"]
+    },
+    {
+        "id": 3500,
+        "original_passage": "SunOfHollywood.com\n\"The Life And Times Of Prophecy\"\nLindsay Lohan swung through to Domingo Zapata's Oscar Art Show to Celebrate her recent positive progress report with the Courts and Judge Stephanie Sautner on Wednesday. And as we all know, she's definitely following through on her Community Servicing.\nThe event was held at Mr. C's Hotel in Beverly Hills, and brought out folks like Stephen Dorff, Jason Segel, Mischa Barton, Jaimie Hilfiger, Tara Reid and Taylor Armstrong. It was also a Mother-Daughter night, where the mothers showed off their works of art, considering Lindsay brought her mama Dina, and Mischa brought her mother Nuala.",
+        "processed_passage": "Lindsay Lohan swung through to Domingo Zapata's Oscar Art Show to Celebrate her recent positive progress report with the Courts and Judge _______ on Wednesday. The event was held at Mr. C's Hotel in Beverly Hills, and brought out folks like Stephen Dorff, Jason Segel, Mischa Barton, Jaimie Hilfiger, Tara Reid and Taylor Armstrong.",
+        "answer": "Stephanie Sautner",
+        "options": ["Stephanie Sautiner", "Stephanie Saunders", "Stephanie Sutter"]
+    },
+    {
+        "id": 3574,
+        "original_passage": ": I am re-doing an upstairs bathroom in a 100 yr old house. The room is gutted from the floor joists to the rafters and to the studs. The toilet drains into a 3\" pipe after approx. a 18\" horizontal run. This 3\" pipe is also the vent stack to the roof. Is it advisable to wet vent the shower and sink through that 18\" horizontal run? I was going to \"T\" the shower and sink drains together and have a single 1 1/2\" pipe connect to the toilet's horizontal run. Shower drain is 6 feet from the toilet horizontal run. Am I flawed in my thinking. Thanks, Kevin\nKevin,The shower drain should be 2\" with a 2\" vent until the lav drops into it. The maximum length of the shower trap arm is 60\". Where these drain into the 3\" line, there should be a wye fitting, if it's on the horizontal. The toilet will need to be vented with a 2\" pipe.",
+        "processed_passage": "I am re-doing an upstairs bathroom in a 100 yr old house. The toilet drains into a 3\" pipe after approx. a 18\" horizontal run. The shower drain should be 2\" with a 2\" vent until the lav drops into it. The maximum length of the shower trap arm is _______. Where these drain into the 3\" line, there should be a wye fitting, if it's on the horizontal.",
+        "answer": "60\"",
+        "options": ["62\"", "50\"", "70\""]
+    },
+    {
+        "id": 3801,
+        "original_passage": "WHAT A BASS! Competitive Fishing to Become Sanctioned KHSAA Sport\nBy: Michael C. Fehn\nUpdated: March 18, 2013\nKHSAA Commissioner, Julian Tackett, announced Wednesday, Competitive Bass Fishing will be an officially sanctioned varsity sport beginning with the next school year. It will join bowling and competitive cheer as the newest additions.\n\"To say we are excited to sponsor bass fishing as a state championship sport-activity is an understatement,\" said Tackett. \", Tackett said.\nKentucky becomes the second state in the country to offer bass fishing as a high school sport. Illinois was the first. Competition will begin in the spring with a regular season, followed by a postseason and state championship in late April.",
+        "processed_passage": "KHSAA Commissioner, _______, announced Wednesday, Competitive Bass Fishing will be an officially sanctioned varsity sport beginning with the next school year. It will join bowling and competitive cheer as the newest additions. Kentucky becomes the second state in the country to offer bass fishing as a high school sport. Illinois was the first.",
+        "answer": "Julian Tackett",
+        "options": ["Julian Tackitt", "Julian Tacket", "Julius Tackett"]
+    },
+    {
+        "id": 3847,
+        "original_passage": "Silicon Power proudly presented its USB/eSATA combi flashdrive last May. Thanks to the eSATA interface, this memory stick could reach very high transfer speeds, while the present USB-port made the drive maintain compatibility with systems not yet featuring eSATA ports. As of yet, Silicon Power has introduced a second edition of the flashdrive, available in storage capacities of 32 or 64 GB. The stick has slidable connectors, making it even more compact.\nThe combi-stick sports dimensions of 76,4 x 27 x 11,4 mm and weighs only 20 grams. By means of the eSATA connector, speeds of up to 90 and 50 MB/s for respectively reading and writing can be reached, while the conventional USB-port allows for a reading speed no greater than 30 MB/s. The USB-end of the stick is capable of writing at 20 MB/s. The 32GB combi-stick has a recommended price of 62 euro, while the 64 GB model is to cost 138 euro.",
+        "processed_passage": "Silicon Power has introduced a second edition of the flashdrive, available in storage capacities of 32 or 64 GB. The combi-stick sports dimensions of 76,4 x 27 x 11,4 mm and weighs only _______.  By means of the eSATA connector, speeds of up to 90 and 50 MB/s for respectively reading and writing can be reached. The 32GB combi-stick has a recommended price of 62 euro, while the 64 GB model is to cost 138 euro.",
+        "answer": "20 grams",
+        "options": ["30 grams", "27 grams", "20 ounces"]
+    },
+    {
+        "id": 3863,
+        "original_passage": "Fear is inertia. It's a reluctance to change direction or a lack of energy that keeps you stuck.\nThe way to fight fear is simple. Each and every time you find yourself at a crossroads, and you know that the only thing keeping you from moving forward is fear, then you should head in that direction—even if your fear seems too big to handle. To turn back is to be defeated. If you choose to be defeated, you'll remain scared until your dying days.\nWhen you have a feeling that resembles fear, track it. That is, ask questions and pay close attention to what you discover. Find out its origin. Maybe you just need a refresher in learning how to jump over the obstacle. Listen to your body as you keep asking questions. Why am I feeling scared? What would make me feel calmer about this situation? What led me to be at this place today?",
+        "processed_passage": "Fear is inertia. It's a reluctance to change direction or a lack of energy that keeps you stuck. The way to fight fear is simple. Each and every time you find yourself at a crossroads, and you know that the only thing keeping you from moving forward is _______, then you should head in that direction—even if your fear seems too big to handle. To turn back is to be defeated.",
+        "answer": "fear",
+        "options": ["uncertainty", "hesitation", "inertia"]
+    },
+    {
+        "id": 3936,
+        "original_passage": "Hot Seat\nIt was a tough Valentine's Day for Google. The No Love for Google website was urging users to \"Break up with Google\" in a widely disseminated video on the Internet. Meanwhile, another group of activists for Chinese democracy were marketing Goolag apparel to protest the company's tacit approval of authoritarian information policies.\nRight now I am watching live streaming video of Congressional testimony about Internet restrictions in China with which American companies like Google, Yahoo, Microsoft, and Cisco are cooperating. The philosophical issues are interesting and include the question of whether a \"right to knowledge\" is a human right.",
+        "processed_passage": "It was a tough Valentine's Day for Google. The No Love for Google website was urging users to \"Break up with Google\" in a widely disseminated video on the Internet. Meanwhile, another group of activists for Chinese democracy were marketing _______ apparel to protest the company's tacit approval of authoritarian information policies.",
+        "answer": "Goolag",
+        "options": ["Googlag", "Gulag", "Goo-lag"]
+    },
+    {
+        "id": 4056,
+        "original_passage": "Revver Study\nOverview.'\nLicense Usage\n- 'Copyright is complicated stuff. Our position on it is pretty simple.':\n- 'At Revver, we staunchly support copyright laws. Our mission and business is firmly rooted in the idea that artists deserve to control and be rewarded from their intellectual property. We also believe strongly in the protections provided by the doctrine of Fair Use, which is part of US copyright law, and to comparable protections provided under the copyright laws in other jurisdictions. While it is impossible to draw a hard and fast line between what is Fair Use and what is not, we understand that we are living in a remix culture and we support an open media environment that allows creators to lawfully build on the work of earlier creators.'\nMotivations.\nMedia\n<script src=\";width:480;height:392;\" type=\"text/javascript\"></script>\n- About CC Wiki\n- This page was last modified on 23 May 2012, at 11:11.",
+        "processed_passage": "At Revver, we staunchly support copyright laws. Our mission and business is firmly rooted in the idea that artists deserve to control and be rewarded from their intellectual property. We also believe strongly in the protections provided by the doctrine of Fair Use, which is part of US copyright law. This page was last modified on _______, at 11:11.",
+        "answer": "23 May 2012",
+        "options": ["23 March 2012", "23 May 2011", "13 May 2012"]
+    },
+    {
+        "id": 4071,
+        "original_passage": "Paul McNultyTalk0\nthis wiki\nPaul McNulty was the Deputy Attorney General for the Greatest Attorney General Ever, and a loyal supporter of The Greatest President Ever.\nIn May, 2007, he quit working for The Greatest Administration Ever to spend more time with his family.\nDuring a press conference to explain his feelings about Mr. McNulty leaving to spend more time with his family, Mr. Gonzales admitted that McNulty was single-handedly responsible for the U.S. attorney firings scandal. And his resignation completely removes any cloud which may have been hanging over the head of Alberto Gonzales.",
+        "processed_passage": "Paul McNulty was the Deputy Attorney General for the Greatest Attorney General Ever, and a loyal supporter of The Greatest President Ever. In _______, he quit working for The Greatest Administration Ever to spend more time with his family. During a press conference, Mr. Gonzales admitted that McNulty was single-handedly responsible for the U.S. attorney firings scandal.",
+        "answer": "May, 2007",
+        "options": ["March, 2007", "May, 2008", "May 2007"]
+    },
+    {
+        "id": 4193,
+        "original_passage": "Panorama's in de omgeving van Veneto\nA: Spinea Venezia Municipio Notturnodoor Pierpaolo Fioravanti, 1.5 hier vandaan\nB: Spinea Venezia Taglio Cedro Del Libano Secolare Presso Municipiodoor Pierpaolo Fioravanti, 1.5 hier vandaan\nC: Arredi Maculan - Hotel Nuova Mestredoor Luciano Covolo, 4.9 hier vandaan\nD: Arredi Maculan - Bar Hotel Nuova Mestredoor Luciano Covolo, 4.9 hier vandaan\nE: Venezia Mestre Piazza Ferretto Mercatini Di Natale 2011-2door Pierpaolo Fioravanti, 7.0 hier vandaan\nF: Venezia Mestre Piazza Ferretto Mercatini Di Natale 2011-3door Pierpaolo Fioravanti, 7.1 hier vandaan\nG: Venezia Mestre Piazza Ferretto Mercatini Di Natale 2011-1door Pierpaolo Fioravanti, 7.1 hier vandaan\nH: Mestre Piazza Ferretto Novembre 2012door Fedele Lupis, 7.1 hier vandaan\nI: Skating place in Margheradoor Luca Vascon, 8.7 hier vandaan",
+        "processed_passage": "Panorama's in de omgeving van Veneto. Spinea Venezia Municipio Notturnodoor Pierpaolo Fioravanti, 1.5 hier vandaan. Arredi Maculan - Hotel Nuova Mestredoor _______, 4.9 hier vandaan. Venezia Mestre Piazza Ferretto Mercatini Di Natale 2011-2door Pierpaolo Fioravanti, 7.0 hier vandaan.",
+        "answer": "Luciano Covolo",
+        "options": ["Luciano Cavolo", "Luciano Covalo", "Luciana Covolo"]
+    },
+    {
+        "id": 5302,
+        "original_passage": "315 Directory Listings\nRestoration\nRestoration\nClassic car restorers can put a little final spit and polish on your classic car, or they can be part magician, part automotive explorers and scholars, turning one or two panels of a car into something that looks like it may have just rolled off the line at Detroit.\nMany are generalists, some specialize in one make, some go as far as to be specialists in one particular model of classic car. They can do the work quicker than you can, and they have access to a network of sources for rare spare part, or have invested in special tools in order to reproduce new parts and trim to original specifications.\nMany will proudly display to you past jobs, or are happy to have you inspect the premises, and see first-hand some of the current projects being worked on. They are all ware that classic car enthusiasts like to talk about cars, and that a job well-done leads to recommendations.",
+        "processed_passage": "Classic car restorers can put a little final spit and polish on your classic car, or they can be part magician, part automotive explorers and scholars, turning one or two panels of a car into something that looks like it may have just rolled off the line at _______. Many are generalists, some specialize in one make, some go as far as to be specialists in one particular model of classic car.",
+        "answer": "Detroit",
+        "options": ["Michigan", "Dearborn", "Flint"]
+    },
+    {
+        "id": 5321,
+        "original_passage": "Michigan citizens sign petition to secede from US\nMichigan among states with petitions to secede from United States\nPublished On: Nov 15 2012 09:58:27 PM EST Updated On: Nov 15 2012 10:22:40 PM EST\nIn the wake of President Barack Obama's re-election, a group of Michiganders want to leave the United States behind.\nCitizens are signing a petition calling for Michigan to secede from the U.S. and create its own new government.\nSo far just more than 18,000 signatures are on the petition.\nMichigan is not the only state with such an idea -- citizens in 19 other states have filed similar peaceful secession petitions.\nThe Michigan petition asks the Obama administration to \"peacefully grant the State of Michigan to withdraw from the United States of America and create its own new government.\"\nMany of the signatures on the petition are from individuals who live outside of Michigan.\nView the petition at WhiteHouse.gov.",
+        "processed_passage": "In the wake of President Barack Obama's re-election, a group of Michiganders want to leave the United States behind. Citizens are signing a petition calling for Michigan to secede from the U.S. and create its own new government. So far just more than _______ signatures are on the petition. Michigan is not the only state with such an idea -- citizens in 19 other states have filed similar peaceful secession petitions.",
+        "answer": "18,000",
+        "options": ["19,000", "8,000", "80,000"]
+    }
+]

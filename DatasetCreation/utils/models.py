@@ -30,13 +30,27 @@ class MLM:
             tokenizer=self.tokenizer
         )
 
-    def get_masked_predictions(self, texts: List[str], top_k: int = 10):
-        results = self.pipeline(texts, top_k=top_k)
+    def get_masked_predictions(self, texts: List[str], top_k: int = 10, batch_size: int = 16):
+        results = []
+        for i in range(0, len(texts), batch_size):
+            batch_texts = texts[i:i+batch_size]
+            results += self.pipeline(batch_texts, top_k=top_k)
         return results
 
 
 if __name__ == "__main__":
     model = MLM("google-bert/bert-base-uncased")
-    results = model.get_masked_predictions(["The capital of France is [MASK]."])
+    a = """
+[MASK]?
+this was a high school project for a president campaign in our government class, yes thats him, for a school project, you guys are crazy
+i know his dad from work. very cool and funny guy!!
+"""
+    results = model.get_masked_predictions([a])
     for res in results:
         print(res)
+
+"""
+Pesky?
+this was a high school project for a president campaign in our government class, yes thats him, for a school project, you guys are crazy
+i know his dad from work. very cool and funny guy!!
+"""

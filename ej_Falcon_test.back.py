@@ -1,6 +1,21 @@
-from MPT.utils.model_utils import MPTGenerator, GenerateConfig
-
+import sys
 import os
+
+# Python 경로에 필요한 디렉토리 추가
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+
+# /data2/PromptMIA를 Python 경로에 추가
+sys.path.insert(0, parent_dir)
+
+print(f"Added to Python path: {parent_dir}")
+
+# Import 시도
+try:
+    from Falcon.utils.model_utils import FalconGenerator, GenerateConfig
+except ImportError:
+    from utils.model_utils import FalconGenerator, GenerateConfig
+
 import re
 import json
 from typing import Dict, List, Tuple
@@ -29,134 +44,96 @@ PARAM_KEY_MAP = {
     "seed": "seed",
 }
 
-# Constants
-ORIGINAL_TEXT = (
-    "Beginners BBQ Class Taking Place in Missoula!\n"
-    "Do you want to get better at making delicious BBQ? You will have the opportunity, "
-    "put this on your calendar now. Thursday, September 22nd join World Class BBQ Champion, "
-    "Tony Balay from Lonestar Smoke Rangers. He will be teaching a beginner level class "
-    "for everyone who wants to get better with their culinary skills.\n"
-    "He will teach you everything you need to know to compete in a KCBS BBQ competition, "
-    "including techniques, recipes, timelines, meat selection and trimming, plus smoker "
-    "and fire information.\n"
-    "The cost to be in the class is $35 per person, and for spectators it is free. "
-    "Included in the cost will be either a t-shirt or apron and you will be tasting "
-    "samples of each meat that is prepared."
-)
+
+class QuizLoader:
+    """JSONL 파일에서 퀴즈를 로드합니다."""
+    
+    def __init__(self, jsonl_path: str):
+        self.jsonl_path = jsonl_path
+        self.quizzes = []
+        self.quiz_configs = {}
+        self.load_quizzes()
+    
+    def load_quizzes(self):
+        """JSONL 파일에서 퀴즈 데이터를 로드합니다."""
+        with open(self.jsonl_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                quiz = json.loads(line.strip())
+                self.quizzes.append(quiz)
+        
+        print(f"Loaded {len(self.quizzes)} quizzes from {self.jsonl_path}")
+        
+        # 각 퀴즈에 대해 정답 위치를 변경하여 여러 구성 생성
+        for quiz in self.quizzes:
+            quiz_id = quiz.get('id', len(self.quiz_configs))
+            answer = quiz['answer']  # 정답
+            wrong_options = quiz['options']  # 오답 선지들 리스트
+            processed_passage = quiz['processed_passage']
+            
+            # 빈칸 표시를 ( ___ )로 변경
+            processed_passage = processed_passage.replace('_______', '( ___ )')
+            
+            # 정답이 각 위치(A, B, C, D)에 오도록 4가지 구성 생성
+            positions = ["A", "B", "C", "D"]
+            
+            for pos in positions:
+                # 정답을 해당 위치에 배치
+                options_dict = {}
+                
+                # 나머지 위치에 오답들을 배치
+                wrong_idx = 0
+                for position in positions:
+                    if position == pos:
+                        # 현재 위치에는 정답 배치
+                        options_dict[position] = answer
+                    else:
+                        # 현재 위치에는 오답 배치
+                        if wrong_idx < len(wrong_options):
+                            options_dict[position] = wrong_options[wrong_idx]
+                            wrong_idx += 1
+                
+                # 키 생성: quiz_{id}_{정답위치}
+                key = f"quiz_{quiz_id}_{pos}"
+                self.quiz_configs[key] = {
+                    "text": processed_passage,
+                    "options": options_dict,
+                    "correct": pos,  # 정답 위치
+                    "original_answer": answer,  # 원래 정답 텍스트
+                    "quiz_id": quiz_id
+                }
+        
+        print(f"Generated {len(self.quiz_configs)} quiz configurations")
+
 
 class QuizBuilder:    
-    QUIZ_CONFIGS = {
-        "event_location": {
-            "replace": ("Missoula", "( ___ )"),
-            "options": {
-                "A": "Helena",
-                "B": "Billings", 
-                "C": "Missoula",
-                "D": "Bozeman"
-            },
-            "correct": "C"
-        },
-        "event_day": {
-            "replace": ("Thursday", "( ___ )"),
-            "options": {
-                "A": "Wednesday",
-                "B": "Thursday",
-                "C": "Friday",
-                "D": "Saturday"
-            },
-            "correct": "B"
-        },
-        "event_date": {
-            "replace": ("September 22nd", "( ___ )"),
-            "options": {
-                "A": "September 21st",
-                "B": "September 22nd",
-                "C": "September 23rd",
-                "D": "September 29th"
-            },
-            "correct": "B"
-        },
-        "instructor_name": {
-            "replace": ("Tony Balay", "( ___ )"),
-            "options": {
-                "A": "Tony Blair",
-                "B": "Tony Balay",
-                "C": "Tony Bennett",
-                "D": "Tony Parker"
-            },
-            "correct": "B"
-        },
-        "team_name": {
-            "replace": ("Lonestar Smoke Rangers", "( ___ )"),
-            "options": {
-                "A": "Texas BBQ Masters",
-                "B": "Smoke Legends",
-                "C": "Lonestar Smoke Rangers",
-                "D": "BBQ Champions United"
-            },
-            "correct": "C"
-        },
-        "competition_org": {
-            "replace": ("KCBS", "( ___ )"),
-            "options": {
-                "A": "KCBS",
-                "B": "IBCA",
-                "C": "MBN",
-                "D": "SCA"
-            },
-            "correct": "A"
-        },
-        "class_cost": {
-            "replace": ("$35", "( ___ )"),
-            "options": {
-                "A": "$25",
-                "B": "$30",
-                "C": "$35",
-                "D": "$40"
-            },
-            "correct": "C"
-        },
-        "spectator_cost": {
-            "replace": ("free", "( ___ )"),
-            "options": {
-                "A": "$5",
-                "B": "$10",
-                "C": "free",
-                "D": "$15"
-            },
-            "correct": "C"
-        },
-        "included_items": {
-            "replace": ("t-shirt or apron", "( ___ )"),
-            "options": {
-                "A": "hat or gloves",
-                "B": "t-shirt or apron",
-                "C": "cookbook or hat",
-                "D": "gloves or tongs"
-            },
-            "correct": "B"
-        }
-    }
+    """JSONL에서 로드한 퀴즈를 관리합니다."""
     
-    @classmethod
-    def build(cls, target: str) -> Tuple[str, Dict[str, str], str]:
-        if target not in cls.QUIZ_CONFIGS:
-            valid_targets = ", ".join(cls.QUIZ_CONFIGS.keys())
-            raise ValueError(f"Invalid target. Must be one of: {valid_targets}")
+    def __init__(self, quiz_loader: QuizLoader = None):
+        self.quiz_loader = quiz_loader
+        self.quiz_configs = {}
+    
+    def load_from_jsonl(self, jsonl_path: str):
+        """JSONL 파일에서 퀴즈를 로드합니다."""
+        self.quiz_loader = QuizLoader(jsonl_path)
+        self.quiz_configs = self.quiz_loader.quiz_configs
+        print(f"Loaded {len(self.quiz_configs)} quiz configurations")
+    
+    def build(self, target: str) -> Tuple[str, Dict[str, str], str]:
+        """특정 타겟의 퀴즈를 반환"""
+        if target not in self.quiz_configs:
+            valid_targets = ", ".join(list(self.quiz_configs.keys())[:10])
+            raise ValueError(f"Invalid target. Available: {valid_targets}...")
         
-        config = cls.QUIZ_CONFIGS[target]
-        old_text, new_text = config["replace"]
-        paragraph = ORIGINAL_TEXT.replace(old_text, new_text, 1)
-        
-        return paragraph, config["options"], config["correct"]
+        config = self.quiz_configs[target]
+        return config["text"], config["options"], config["correct"]
 
 
 class PromptBuilder:
-    """Build chat messages with system prompt for MPT."""
+    """Build chat messages with system prompt."""
 
     @staticmethod
     def build_chat_messages(paragraph: str, options: Dict[str, str]) -> List[Dict]:
-        """Build chat messages with few-shot examples for MPT-7B-Chat."""
+        """Build chat messages with few-shot examples."""
         options_text = "\n".join([f"{k}. {v}" for k, v in options.items()])
         
         return [
@@ -168,16 +145,16 @@ class PromptBuilder:
                 "role": "user",
                 "content": (
                     "The capital of France is ( ___ ).\n"
-                    "A. London\n"
-                    "B. Madrid\n"
+                    "A. Paris\n"
+                    "B. London\n"
                     "C. Berlin\n"
-                    "D. Paris\n\n"
+                    "D. Madrid\n\n"
                     "Your answer:"
                 )
             },
             {
                 "role": "assistant",
-                "content": "D"
+                "content": "A"
             },
             {
                 "role": "user",
@@ -193,6 +170,36 @@ class PromptBuilder:
             {
                 "role": "assistant",
                 "content": "B"
+            },
+            {
+                "role": "user",
+                "content": (
+                    "The largest ocean on Earth is ( ___ ).\n"
+                    "A. Atlantic Ocean\n"
+                    "B. Indian Ocean\n"
+                    "C. Pacific Ocean\n"
+                    "D. Arctic Ocean\n\n"
+                    "Your answer:"
+                )
+            },
+            {
+                "role": "assistant",
+                "content": "C"
+            },
+            {
+                "role": "user",
+                "content": (
+                    "The sun rises in the ( ___ ).\n"
+                    "A. North\n"
+                    "B. South\n"
+                    "C. West\n"
+                    "D. East\n\n"
+                    "Your answer:"
+                )
+            },
+            {
+                "role": "assistant",
+                "content": "D"
             },
             {
                 "role": "user",
@@ -213,12 +220,10 @@ class ResponseAnalyzer:
         """Extract the first valid letter (A-D) from response."""
         response = response.strip()
         
-        # Try to find a letter with word boundaries
         match = re.search(r"\b([A-D])\b", response, flags=re.IGNORECASE)
         if match:
             return match.group(1).upper()
         
-        # Fall back to finding any A-D character
         for char in response:
             if char.upper() in "ABCD":
                 return char.upper()
@@ -271,10 +276,8 @@ class FileManager:
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
         
         with open(save_path, "w", encoding="utf-8") as f:
-            # Write metadata
             f.write(json.dumps({"type": "meta", **metadata}, ensure_ascii=False) + "\n")
             
-            # Write each sample
             for i, (raw, pred) in enumerate(zip(raw_outputs, predictions)):
                 record = {
                     "type": "sample",
@@ -288,12 +291,39 @@ class FileManager:
     @staticmethod
     def append_final_result(target: str, majority: str, correct: str, results_dir: str) -> None:
         """Append final result to summary file with target label."""
-        final_path = os.path.join(results_dir, "final_results_mpt.jsonl")
+        final_path = os.path.join(results_dir, "final_results.jsonl")
         os.makedirs(results_dir, exist_ok=True)
         
         with open(final_path, "a", encoding="utf-8") as f:
             data = {"target": target, "predict": majority, "correct": correct}
             f.write(json.dumps(data) + "\n")
+    
+    @staticmethod
+    def save_experiment_metadata(
+        results_dir: str,
+        jsonl_path: str,
+        model_name: str,
+        samples: int,
+        num_repeats: int,
+        params: Dict
+    ) -> None:
+        """실험 메타데이터를 저장합니다."""
+        metadata_path = os.path.join(results_dir, "experiment_metadata.json")
+        os.makedirs(results_dir, exist_ok=True)
+        
+        metadata = {
+            "experiment_info": {
+                "timestamp": datetime.now().isoformat(),
+                "jsonl_path": jsonl_path,
+                "model_name": model_name,
+                "samples_per_experiment": samples,
+                "repeats_per_target": num_repeats,
+            },
+            "generation_params": params
+        }
+        
+        with open(metadata_path, "w", encoding="utf-8") as f:
+            json.dump(metadata, f, ensure_ascii=False, indent=2)
 
 
 def chunked(lst: List, n: int) -> List[List]:
@@ -316,15 +346,14 @@ def run_single_experiment(
     show_all: bool,
     seed: int,
     debug_mode: bool,
-    gen: MPTGenerator,
+    gen: FalconGenerator,
+    quiz_builder: QuizBuilder,
     results_dir: str,
 ) -> Dict:
     """Run a single quiz experiment and return results."""
     
-    # Build quiz
-    paragraph, options, correct = QuizBuilder.build(target)
+    paragraph, options, correct = quiz_builder.build(target)
     
-    # Initialize config
     cfg = GenerateConfig(
         max_new_tokens=max_new_tokens,
         temperature=temperature,
@@ -335,33 +364,29 @@ def run_single_experiment(
         do_sample=True,
     )
     
-    # Build chat messages and format for MPT
     messages = PromptBuilder.build_chat_messages(paragraph, options)
-    prompt_text = gen.format_chat_prompt(messages)
+    prompt_text = gen.tokenizer.apply_chat_template(
+        messages, tokenize=False, add_generation_prompt=True
+    )
     
-    # Set seed if specified
     if seed is not None and seed != 0:
         import torch
         torch.manual_seed(seed)
     
-    # Generate responses in batches
     prompts = [prompt_text] * samples
     raw_outputs = []
     
     print(f"  Generating {samples} samples...")
     for i, chunk in enumerate(chunked(prompts, batch_size)):
-        batch_outputs = gen.generate_batch(chunk, cfg, use_chat_format=False)
+        batch_outputs = gen.generate_batch(chunk, cfg)
         raw_outputs.extend(batch_outputs)
     
-    # Analyze responses
     predictions = [ResponseAnalyzer.extract_letter(output) for output in raw_outputs]
     analysis = ResponseAnalyzer.analyze_predictions(predictions, correct)
     
-    # Display results
     print(f"  Distribution: {' '.join([f'{k}:{v}' for k, v in sorted(analysis['distribution'].items())])}")
     print(f"  Majority: {analysis['majority']} | Correct: {correct} | {'✓' if analysis['is_correct'] else '✗'}")
     
-    # Save results
     params = {
         "temperature": temperature,
         "top_p": top_p,
@@ -394,7 +419,8 @@ def run_single_experiment(
 
 
 def run(
-    model_name: str = "mosaicml/mpt-7b-chat",
+    jsonl_path: str,
+    model_name: str = "tiiuae/falcon-7b-instruct",
     samples: int = 32,
     batch_size: int = 16,
     max_new_tokens: int = 5,
@@ -405,35 +431,73 @@ def run(
     show_all: bool = False,
     seed: int = 0,
     debug_mode: bool = False,
-    num_repeats: int = 10,
-    sub_folder: str = "test_mpt1"
+    num_repeats: int = 15,
+    test_number: int = 1,
 ) -> None:
-
-    # Load environment
+    """
+    JSONL 파일에서 퀴즈를 로드하여 실험합니다.
+    
+    Args:
+        jsonl_path: 퀴즈 데이터가 담긴 JSONL 파일 경로 (필수)
+        model_name: 사용할 모델 이름
+        samples: 실험당 샘플 수
+        num_repeats: 각 타겟당 반복 횟수
+        test_number: 테스트 번호 (결과 디렉토리 이름에 사용)
+    """
+    
+    if not os.path.exists(jsonl_path):
+        raise FileNotFoundError(f"JSONL file not found: {jsonl_path}")
+    
     load_dotenv()
-    base_results_dir = os.getenv("RESULTS_DIR_MPT").rstrip("/")
+    base_results_dir = os.getenv("EJ_RESULTS_DIR", "/data2/PromptMIA/Falcon_ej/results").rstrip("/")
+    
+    sub_folder = f"test_{test_number}"
     results_dir = os.path.join(base_results_dir, sub_folder)
     
-    # Initialize model once
+    os.makedirs(results_dir, exist_ok=True)
+    
     print("=" * 70)
-    print("INITIALIZING MPT MODEL")
+    print(f"EXPERIMENT {test_number}: LOADING QUIZZES FROM JSONL")
+    print("=" * 70)
+    print(f"JSONL Path: {jsonl_path}")
+    print(f"Results Directory: {results_dir}")
+    
+    quiz_builder = QuizBuilder()
+    quiz_builder.load_from_jsonl(jsonl_path)
+    
+    params = {
+        "temperature": temperature,
+        "top_p": top_p,
+        "top_k": top_k,
+        "repetition_penalty": repetition_penalty,
+        "max_new_tokens": max_new_tokens,
+        "batch_size": batch_size,
+        "seed": seed,
+    }
+    
+    FileManager.save_experiment_metadata(
+        results_dir=results_dir,
+        jsonl_path=jsonl_path,
+        model_name=model_name,
+        samples=samples,
+        num_repeats=num_repeats,
+        params=params
+    )
+    print(f"Experiment metadata saved to: {os.path.join(results_dir, 'experiment_metadata.json')}")
+    
+    print("\n" + "=" * 70)
+    print("INITIALIZING FALCON MODEL")
     print("=" * 70)
     print(f"Model: {model_name}")
     print(f"Samples per experiment: {samples}")
     print(f"Repeats per target: {num_repeats}")
     print("=" * 70 + "\n")
     
-    gen = MPTGenerator(
-        model_name=model_name,
-        cache_env_key="MODEL_CACHE_DIR"
-    )
+    gen = FalconGenerator(model_name=model_name)
     
-    # Define all targets
-    targets = ["event_location", "event_day", "event_date", "instructor_name",
-               "team_name", "competition_org", "class_cost", "spectator_cost",
-               "included_items"]
+    targets = list(quiz_builder.quiz_configs.keys())
+    print(f"\nTotal quiz targets: {len(targets)}")
     
-    # Run experiments
     total_experiments = len(targets) * num_repeats
     current_exp = 0
     
@@ -460,15 +524,17 @@ def run(
                 seed=seed,
                 debug_mode=debug_mode,
                 gen=gen,
+                quiz_builder=quiz_builder,
                 results_dir=results_dir,
             )
     
     print("\n" + "=" * 70)
-    print("ALL EXPERIMENTS COMPLETED")
+    print(f"EXPERIMENT {test_number} COMPLETED")
     print("=" * 70)
     print(f"Total experiments: {total_experiments}")
     print(f"Results saved to: {results_dir}")
-    print(f"Summary file: {os.path.join(results_dir, 'final_results_mpt.jsonl')}")
+    print(f"Metadata file: {os.path.join(results_dir, 'experiment_metadata.json')}")
+    print(f"Summary file: {os.path.join(results_dir, 'final_results.jsonl')}")
     print("=" * 70 + "\n")
 
 
